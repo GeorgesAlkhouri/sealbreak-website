@@ -1,0 +1,61 @@
+<div class="paper-card">
+  <div class="paper-card__layer paper-card__layer--back" aria-hidden="true"></div>
+  <div class="paper-card__layer paper-card__layer--middle" aria-hidden="true"></div>
+  <div class="paper-card__front">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .paper-card {
+    position: relative;
+    width: 100%;
+    isolation: isolate;
+  }
+
+  .paper-card__layer,
+  .paper-card__front {
+    border-radius: 1.875rem;
+  }
+
+  .paper-card__layer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .paper-card__layer--back {
+    z-index: -2;
+    background: var(--card-back-2);
+    transform: translate(0.65rem, 0.85rem);
+    box-shadow: 0 0.75rem 1.2rem rgb(0 0 0 / 0.3);
+  }
+
+  .paper-card__layer--middle {
+    z-index: -1;
+    background: var(--card-back-1);
+    transform: translate(0.32rem, 0.45rem);
+    box-shadow: 0 0.5rem 0.9rem rgb(0 0 0 / 0.24);
+  }
+
+  .paper-card__front {
+    position: relative;
+    background: var(--card);
+    box-shadow: 0 0.75rem 1.35rem rgb(0 0 0 / 0.36);
+  }
+
+  @media (max-width: 560px) {
+    .paper-card__layer,
+    .paper-card__front {
+      border-radius: 1.6rem;
+    }
+
+    .paper-card__layer--back {
+      transform: translate(0.45rem, 0.65rem);
+    }
+
+    .paper-card__layer--middle {
+      transform: translate(0.22rem, 0.35rem);
+    }
+  }
+</style>
