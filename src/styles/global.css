@@ -1,0 +1,54 @@
+:root {
+  --sky: #11324f;
+  --mountain-far: #486781;
+  --mountain-mid: #2c516e;
+  --mountain-near: #143b5a;
+  --water: #1c435f;
+  --forest-mid: #0d2b42;
+  --forest-front: #041a2c;
+  --card-back-2: #092e54;
+  --card-back-1: #0b3661;
+  --card: #0e4070;
+  --ring: #376484;
+  --button-back: #063d91;
+  --button: #0a7afa;
+  --sun: #ff5940;
+  --cream: #f5e8cc;
+  --secondary-text: #96b8d6;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 20rem;
+  background: var(--forest-front);
+  color-scheme: dark;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "SF Pro Text",
+    "Segoe UI",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  min-width: 20rem;
+  min-height: 100vh;
+  margin: 0;
+}
+
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  background: var(--sun);
+  color: var(--forest-front);
+}

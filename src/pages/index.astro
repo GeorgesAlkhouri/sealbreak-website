@@ -1,0 +1,152 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Brand from "../components/Brand.astro";
+import PapercutCard from "../components/PapercutCard.astro";
+import PapercutScene from "../components/PapercutScene.astro";
+import PrimaryLink from "../components/PrimaryLink.astro";
+---
+
+<BaseLayout>
+  <main class="landing">
+    <PapercutScene />
+
+    <div class="page-frame">
+      <header class="site-header">
+        <Brand />
+      </header>
+
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero__card">
+          <PapercutCard>
+            <div class="hero__copy">
+              <p class="hero__eyebrow">SHAMIR UNSEAL FOR IOS</p>
+              <h1 id="hero-title">Unlock OpenBao or Vault with Face ID.</h1>
+              <p class="hero__description">
+                Sealbreak keeps one Shamir unseal share protected on your
+                iPhone and releases it only after explicit Face ID
+                authorization.
+              </p>
+            </div>
+          </PapercutCard>
+        </div>
+
+        <div class="hero__action">
+          <PrimaryLink href="https://github.com/GeorgesAlkhouri/sealbreak">
+            View on GitHub
+          </PrimaryLink>
+          <p>Open source · GPL-3.0</p>
+        </div>
+      </section>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .landing {
+    position: relative;
+    min-height: 100svh;
+    overflow: hidden;
+    background: var(--sky);
+  }
+
+  .page-frame {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    width: min(calc(100% - 3rem), 74rem);
+    min-height: 100svh;
+    margin: 0 auto;
+    flex-direction: column;
+  }
+
+  .site-header {
+    padding-top: clamp(1.75rem, 4vh, 3.2rem);
+  }
+
+  .hero {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding: clamp(3.5rem, 8vh, 6.5rem) 0 clamp(14.5rem, 27vh, 19rem);
+  }
+
+  .hero__card {
+    width: min(100%, 40rem);
+  }
+
+  .hero__copy {
+    padding: clamp(2.2rem, 4vw, 3.2rem) clamp(1.7rem, 5vw, 3.7rem);
+    text-align: center;
+  }
+
+  .hero__eyebrow {
+    margin: 0 0 1rem;
+    color: var(--secondary-text);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+  }
+
+  h1 {
+    margin: 0;
+    color: var(--cream);
+    font-size: clamp(2.25rem, 1.7rem + 2.2vw, 3.8rem);
+    font-weight: 850;
+    line-height: 1.04;
+    letter-spacing: -0.045em;
+    text-wrap: balance;
+    text-shadow: 0 0.25rem 0.3rem rgb(0 0 0 / 0.18);
+  }
+
+  .hero__description {
+    max-width: 31rem;
+    margin: 1.35rem auto 0;
+    color: var(--cream);
+    font-size: clamp(1rem, 0.94rem + 0.25vw, 1.18rem);
+    font-weight: 520;
+    line-height: 1.55;
+    opacity: 0.94;
+    text-wrap: pretty;
+  }
+
+  .hero__action {
+    display: grid;
+    justify-items: center;
+    gap: 0.95rem;
+    width: min(100%, 22rem);
+  }
+
+  .hero__action p {
+    margin: 0;
+    color: var(--secondary-text);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+
+  @media (max-width: 560px) {
+    .page-frame {
+      width: min(calc(100% - 2rem), 74rem);
+    }
+
+    .site-header {
+      padding-top: 1.35rem;
+    }
+
+    .hero {
+      gap: 1.7rem;
+      padding-top: 3.2rem;
+      padding-bottom: 14.5rem;
+    }
+
+    .hero__copy {
+      padding: 2.1rem 1.45rem 2.25rem;
+    }
+
+    .hero__eyebrow {
+      font-size: 0.66rem;
+    }
+  }
+</style>
