@@ -7,8 +7,9 @@ interface Props {
 }
 
 const {
-  title = "Sealbreak",
-  description = "Unlock OpenBao or HashiCorp Vault with Face ID.",
+  title = "Sealbreak — OpenBao & Vault Unseal for iPhone",
+  description =
+    "Sealbreak is an open-source iPhone app for securely unsealing OpenBao and HashiCorp Vault using a protected Shamir share and Face ID.",
 } = Astro.props;
 
 const canonicalURL = Astro.site
@@ -23,8 +24,24 @@ const canonicalURL = Astro.site
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <meta name="theme-color" content="#11324F" />
+    <meta name="application-name" content="Sealbreak" />
     <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+
     <link rel="canonical" href={canonicalURL} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Sealbreak" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
     <title>{title}</title>
   </head>
   <body>
