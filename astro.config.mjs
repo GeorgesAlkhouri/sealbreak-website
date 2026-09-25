@@ -1,7 +1,6 @@
 import { defineConfig } from "astro/config";
 
 export default defineConfig({
-  site: "https://georgesalkhouri.github.io",
-  base: "/sealbreak-website",
+  site: "https://sealbreak.app",
   output: "static",
 });
