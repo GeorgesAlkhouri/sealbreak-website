@@ -4,17 +4,36 @@ import "../styles/global.css";
 interface Props {
   title?: string;
   description?: string;
+  socialImage?: string;
+  socialImageAlt?: string;
+  includeWebsiteStructuredData?: boolean;
 }
 
 const {
   title = "Sealbreak — OpenBao & Vault Unseal for iPhone",
   description =
     "Sealbreak is an open-source iPhone app for securely unsealing OpenBao and HashiCorp Vault using a protected Shamir share and Face ID.",
+  socialImage = "/og.png",
+  socialImageAlt = "Sealbreak — OpenBao & Vault Unseal for iPhone",
+  includeWebsiteStructuredData = false,
 } = Astro.props;
 
 const canonicalURL = Astro.site
   ? new URL(Astro.url.pathname, Astro.site)
   : Astro.url;
+
+const socialImageURL = new URL(
+  socialImage,
+  Astro.site ?? Astro.url.origin,
+);
+
+const websiteStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Sealbreak",
+  alternateName: ["sealbreak.app"],
+  url: "https://sealbreak.app/",
+};
 ---
 
 <!doctype html>
@@ -37,10 +56,27 @@ const canonicalURL = Astro.site
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={socialImageURL} />
+    <meta property="og:image:secure_url" content={socialImageURL} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={socialImageAlt} />
 
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImageURL} />
+    <meta name="twitter:image:alt" content={socialImageAlt} />
+
+    {
+      includeWebsiteStructuredData && (
+        <script
+          type="application/ld+json"
+          set:html={JSON.stringify(websiteStructuredData)}
+        />
+      )
+    }
 
     <title>{title}</title>
   </head>
