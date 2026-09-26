@@ -4,5 +4,9 @@ import { defineConfig } from "astro/config";
 export default defineConfig({
   site: "https://sealbreak.app",
   output: "static",
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      filter: (page) => new URL(page).pathname !== "/og-preview/",
+    }),
+  ],
 });

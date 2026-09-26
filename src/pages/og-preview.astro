@@ -1,0 +1,86 @@
+---
+import Brand from "../components/Brand.astro";
+import PapercutCard from "../components/PapercutCard.astro";
+import PapercutScene from "../components/PapercutScene.astro";
+import "../styles/global.css";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Sealbreak social preview</title>
+  </head>
+  <body>
+    <main class="og-preview">
+      <PapercutScene />
+      <header class="og-preview__header">
+        <Brand />
+      </header>
+      <div class="og-preview__card">
+        <PapercutCard>
+          <div class="og-preview__copy">
+            <p>SHAMIR UNSEAL FOR IOS</p>
+            <h1>Unlock OpenBao<br />or Vault with Face ID.</h1>
+          </div>
+        </PapercutCard>
+      </div>
+    </main>
+  </body>
+</html>
+
+<style>
+  .og-preview {
+    position: relative;
+    width: 1200px;
+    height: 630px;
+    overflow: hidden;
+    background: var(--sky);
+  }
+
+  .og-preview__header {
+    position: relative;
+    z-index: 1;
+    padding: 48px 64px;
+  }
+
+  .og-preview__card {
+    position: relative;
+    z-index: 1;
+    width: 790px;
+    margin: 42px auto 0;
+  }
+
+  .og-preview__copy {
+    padding: 42px 54px 46px;
+    text-align: center;
+  }
+
+  .og-preview__copy p {
+    margin: 0 0 18px;
+    color: var(--secondary-text);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+  }
+
+  .og-preview__copy h1 {
+    margin: 0;
+    color: var(--cream);
+    font-size: 58px;
+    font-weight: 850;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    text-wrap: balance;
+  }
+
+  .og-preview :global(.scene__landscape) {
+    height: 200px;
+  }
+
+  .og-preview :global(.scene__header-wave) {
+    height: 112px;
+  }
+</style>
