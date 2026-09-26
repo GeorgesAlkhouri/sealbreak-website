@@ -1,0 +1,104 @@
+---
+---
+
+<div class="testflight-card" role="note" aria-label="Sealbreak beta coming soon on TestFlight">
+  <span class="testflight-card__icon" aria-hidden="true">
+    <svg viewBox="0 0 49 58">
+      <path
+        d="M24.25 4L40.5 9.625V20.875C40.5 32.125 34.25 39.625 24.25 45.25C14.25 39.625 8 32.125 8 20.875V9.625L24.25 4ZM24.25 9.625L13 13.375V20.875C13 28.375 16.75 34 24.25 39C31.75 34 35.5 28.375 35.5 20.875V13.375L24.25 9.625Z"
+        fill="currentColor"
+      />
+    </svg>
+  </span>
+
+  <span class="testflight-card__copy">
+    <span class="testflight-card__title">Sealbreak Beta</span>
+    <span class="testflight-card__subtitle">TestFlight</span>
+  </span>
+
+  <span class="testflight-card__status">Soon</span>
+</div>
+
+<style>
+  .testflight-card {
+    display: grid;
+    width: 100%;
+    min-height: 4.5rem;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.65rem 0.75rem 0.65rem 0.65rem;
+    border: 1px solid rgb(245 232 204 / 0.14);
+    border-radius: 1.375rem;
+    background:
+      linear-gradient(180deg, rgb(245 232 204 / 0.1), rgb(245 232 204 / 0.04)),
+      rgb(4 26 44 / 0.28);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.06),
+      0 0.5rem 1.25rem rgb(0 0 0 / 0.22);
+    backdrop-filter: blur(12px);
+  }
+
+  .testflight-card__icon {
+    display: grid;
+    width: 3rem;
+    height: 3rem;
+    place-items: center;
+    border-radius: 1rem;
+    background: linear-gradient(145deg, #2290ff, var(--button));
+    color: var(--cream);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.2),
+      0 0.25rem 0.7rem rgb(0 0 0 / 0.24);
+  }
+
+  .testflight-card__icon svg {
+    width: 1.65rem;
+    height: auto;
+  }
+
+  .testflight-card__copy {
+    display: grid;
+    min-width: 0;
+    gap: 0.18rem;
+    text-align: left;
+  }
+
+  .testflight-card__title {
+    overflow: hidden;
+    color: var(--cream);
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.15;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .testflight-card__subtitle {
+    color: var(--secondary-text);
+    font-size: 0.78rem;
+    font-weight: 560;
+    line-height: 1.2;
+  }
+
+  .testflight-card__status {
+    display: inline-flex;
+    min-height: 1.85rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0.35rem 0.7rem;
+    border: 1px solid rgb(10 122 250 / 0.34);
+    border-radius: 999px;
+    background: rgb(10 122 250 / 0.14);
+    color: #8fc8ff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+
+  @supports not (backdrop-filter: blur(12px)) {
+    .testflight-card {
+      background: rgb(13 43 66 / 0.92);
+    }
+  }
+</style>
