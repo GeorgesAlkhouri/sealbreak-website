@@ -295,9 +295,36 @@ const trustItems = [
     bottom: calc(clamp(13.5rem, 24vw, 18rem) + 1.35rem);
     left: clamp(0.65rem, 1.2vw, 1.25rem);
     display: none;
+    isolation: isolate;
     color: var(--forest-front);
     text-decoration: none;
     filter: drop-shadow(0 0.5rem 0.55rem rgb(0 0 0 / 0.26));
+  }
+
+  .hero__scroll-cue::before,
+  .hero__scroll-cue::after {
+    position: absolute;
+    z-index: -1;
+    width: clamp(8.2rem, 9vw, 9.2rem);
+    height: clamp(7.5rem, 8vw, 8.4rem);
+    clip-path: polygon(2% 3%, 96% 0, 100% 96%, 4% 100%, 0 8%);
+    content: "";
+    pointer-events: none;
+  }
+
+  .hero__scroll-cue::before {
+    top: 0.32rem;
+    left: 0.28rem;
+    background: #d8cfbd;
+    transform: rotate(0.7deg);
+  }
+
+  .hero__scroll-cue::after {
+    top: 0.62rem;
+    left: 0.58rem;
+    z-index: -2;
+    background: #8999ad;
+    transform: rotate(2.6deg);
   }
 
   .hero__scroll-cue-paper {
@@ -322,10 +349,10 @@ const trustItems = [
     left: 50%;
     width: 3.6rem;
     height: 1.15rem;
-    background: rgb(72 103 129 / 0.88);
+    background: #7f6aa8;
     clip-path: polygon(4% 8%, 96% 0, 100% 88%, 3% 100%);
     content: "";
-    filter: drop-shadow(0 0.12rem 0.12rem rgb(0 0 0 / 0.15));
+    filter: drop-shadow(0 0.12rem 0.12rem rgb(0 0 0 / 0.16));
     transform: translateX(-50%) rotate(-4deg);
   }
 
@@ -355,6 +382,14 @@ const trustItems = [
 
   .hero__scroll-cue:hover .hero__scroll-cue-arrow {
     transform: translateY(0.16rem);
+  }
+
+  #workflow {
+    scroll-margin-top: 2rem;
+  }
+
+  :global(html) {
+    scroll-behavior: smooth;
   }
 
   .workflow {
@@ -609,6 +644,10 @@ const trustItems = [
   }
 
   @media (prefers-reduced-motion: reduce) {
+    :global(html) {
+      scroll-behavior: auto;
+    }
+
     .hero__scroll-cue-paper,
     .hero__scroll-cue-arrow,
     .trust__actions a span {
