@@ -98,7 +98,6 @@ const trustItems = [
       </div>
 
       <a class="hero__scroll-cue" href="#workflow">
-        <span class="hero__scroll-cue-tape" aria-hidden="true"></span>
         <span class="hero__scroll-cue-paper">
           <span class="hero__scroll-cue-label">HOW IT WORKS</span>
           <span class="hero__scroll-cue-arrow" aria-hidden="true">↓</span>
@@ -342,20 +341,6 @@ const trustItems = [
     text-align: left;
     transform: rotate(-1.35deg);
     transition: transform 140ms ease;
-  }
-
-  .hero__scroll-cue-tape {
-    position: absolute;
-    z-index: 3;
-    top: -0.48rem;
-    left: 1.05rem;
-    width: 3rem;
-    height: 0.95rem;
-    background: #7f6aa8;
-    clip-path: polygon(4% 8%, 96% 0, 100% 88%, 3% 100%);
-    filter: drop-shadow(0 0.1rem 0.1rem rgb(0 0 0 / 0.15));
-    pointer-events: none;
-    transform: rotate(-5deg);
   }
 
   .hero__scroll-cue-label {
