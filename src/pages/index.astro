@@ -94,10 +94,18 @@ const trustItems = [
             <p>Open source · GPL-3.0</p>
           </div>
         </div>
+
       </div>
+
+      <a class="hero__scroll-cue" href="#workflow">
+        <span class="hero__scroll-cue-paper">
+          <span class="hero__scroll-cue-label">HOW IT WORKS</span>
+          <span class="hero__scroll-cue-arrow" aria-hidden="true">↓</span>
+        </span>
+      </a>
     </section>
 
-    <section class="workflow" aria-labelledby="workflow-title">
+    <section id="workflow" class="workflow" aria-labelledby="workflow-title">
       <div class="section-shell">
         <header class="section-intro">
           <p class="section-eyebrow">WHAT SEALBREAK DOES</p>
@@ -281,6 +289,92 @@ const trustItems = [
     letter-spacing: 0.04em;
   }
 
+  .hero__scroll-cue {
+    position: absolute;
+    z-index: 2;
+    bottom: calc(clamp(13.5rem, 24vw, 18rem) + 1.35rem);
+    left: max(0.25rem, env(safe-area-inset-left));
+    display: none;
+    isolation: isolate;
+    color: var(--forest-front);
+    text-decoration: none;
+    filter: drop-shadow(0 0.42rem 0.48rem rgb(0 0 0 / 0.24));
+  }
+
+  .hero__scroll-cue::before,
+  .hero__scroll-cue::after {
+    position: absolute;
+    z-index: -1;
+    width: clamp(10rem, 11vw, 11.4rem);
+    height: clamp(4.35rem, 4.8vw, 4.9rem);
+    clip-path: polygon(2% 5%, 97% 0, 100% 93%, 4% 100%, 0 10%);
+    content: "";
+  }
+
+  .hero__scroll-cue::before {
+    top: 0.2rem;
+    left: 0.24rem;
+    background: #d8cfbd;
+    transform: rotate(0.8deg);
+  }
+
+  .hero__scroll-cue::after {
+    top: 0.42rem;
+    left: 0.5rem;
+    z-index: -2;
+    background: #8999ad;
+    transform: rotate(2deg);
+  }
+
+  .hero__scroll-cue-paper {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    width: clamp(10rem, 11vw, 11.4rem);
+    min-height: clamp(4.35rem, 4.8vw, 4.9rem);
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem 1rem 0.9rem;
+    background: var(--cream);
+    clip-path: polygon(2% 5%, 97% 0, 100% 93%, 4% 100%, 0 10%);
+    text-align: left;
+    transform: rotate(-1.35deg);
+    transition: transform 140ms ease;
+  }
+
+  .hero__scroll-cue-label {
+    font-size: 0.72rem;
+    font-weight: 850;
+    line-height: 1.05;
+    letter-spacing: 0.09em;
+    white-space: nowrap;
+  }
+
+  .hero__scroll-cue:hover .hero__scroll-cue-paper {
+    transform: translateY(-0.12rem) rotate(-1.35deg);
+  }
+
+  .hero__scroll-cue:focus-visible {
+    outline: 3px solid var(--sun);
+    outline-offset: 0.45rem;
+  }
+
+  .hero__scroll-cue-arrow {
+    color: var(--sun);
+    font-size: 1.3rem;
+    font-weight: 800;
+    line-height: 0.9;
+    transition: transform 140ms ease;
+  }
+
+  .hero__scroll-cue:hover .hero__scroll-cue-arrow {
+    transform: translateY(0.16rem);
+  }
+
+  :global(html) {
+    scroll-behavior: smooth;
+  }
+
   .workflow {
     position: relative;
     overflow: hidden;
@@ -437,6 +531,18 @@ const trustItems = [
     outline-offset: 0.3rem;
   }
 
+  @media (min-width: 900px) {
+    .hero__scroll-cue {
+      display: inline-flex;
+    }
+  }
+
+  @media (min-width: 1200px) and (min-aspect-ratio: 2/1) {
+    .hero {
+      padding-top: clamp(5rem, 10vh, 8rem);
+    }
+  }
+
   @media (max-width: 840px) {
     .workflow__grid {
       display: flex;
@@ -521,6 +627,12 @@ const trustItems = [
   }
 
   @media (prefers-reduced-motion: reduce) {
+    :global(html) {
+      scroll-behavior: auto;
+    }
+
+    .hero__scroll-cue-paper,
+    .hero__scroll-cue-arrow,
     .trust__actions a span {
       transition: none;
     }
