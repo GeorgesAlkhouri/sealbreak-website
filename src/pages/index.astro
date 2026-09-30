@@ -18,16 +18,16 @@ const workflowSteps = [
   },
   {
     number: "02",
-    title: "Authorize when needed",
+    title: "Approve with Face ID",
     description:
-      "When your server is sealed, start the unseal from Sealbreak and authorize access to the protected share with Face ID.",
+      "Tap Unseal, then use Face ID to allow access to your share.",
     variant: "sealed" as const,
   },
   {
     number: "03",
-    title: "Know the result",
+    title: "Check the result",
     description:
-      "Sealbreak submits the share directly to that server, then checks the resulting seal state.",
+      "Sealbreak sends your share to the server and checks whether it is still sealed.",
     variant: "result" as const,
   },
 ];
@@ -37,25 +37,25 @@ const trustItems = [
     icon: "device" as const,
     title: "Device-bound storage",
     description:
-      "Your stored share is protected by the iOS Keychain, bound to this device, and guarded by Face ID. Sealbreak does not cloud-sync the share or provide a share export.",
+      "Your share is stored in the iOS Keychain on this iPhone. Sealbreak does not sync it to the cloud or offer an export option.",
   },
   {
     icon: "face" as const,
     title: "Face ID required",
     description:
-      "Biometric authorization is enforced when Sealbreak accesses the protected Keychain item for a sensitive operation.",
+      "Face ID is required before Sealbreak can read your stored share.",
   },
   {
     icon: "direct" as const,
     title: "Direct connection",
     description:
-      "Sealbreak connects directly to the OpenBao or Vault endpoint you configure. There is no Sealbreak relay in between.",
+      "Sealbreak connects directly to the OpenBao or Vault endpoint you configure. There is no Sealbreak relay.",
   },
   {
     icon: "open" as const,
-    title: "Open by design",
+    title: "Open source",
     description:
-      "The source code and threat model are public, including security assumptions, known risks, and design decisions.",
+      "The source code and threat model are public, including security assumptions and known risks.",
   },
 ];
 ---
@@ -74,11 +74,11 @@ const trustItems = [
           <div class="hero__card">
             <PapercutCard>
               <div class="hero__copy">
-                <p class="hero__eyebrow">OPENBAO &amp; VAULT UNSEAL FOR IOS</p>
+                <p class="hero__eyebrow">OPENBAO &amp; VAULT FOR IPHONE</p>
                 <h1 id="hero-title">Unlock OpenBao or Vault with Face ID.</h1>
                 <p class="hero__description">
                   Sealbreak keeps one unseal share protected on your iPhone and
-                  submits it only after explicit Face ID authorization.
+                  sends it to your server only after Face ID.
                 </p>
               </div>
             </PapercutCard>
@@ -102,13 +102,15 @@ const trustItems = [
         <header class="section-intro">
           <p class="section-eyebrow">WHAT SEALBREAK DOES</p>
           <h2 id="workflow-title">Your unseal share, ready when you need it.</h2>
-          <p class="section-lead">
-            Set it up once, then use a deliberate Face ID-authorized flow
-            whenever your OpenBao or Vault server needs to be unsealed.
-          </p>
+
         </header>
 
-        <div class="workflow__grid">
+        <div
+          class="workflow__grid"
+          role="region"
+          aria-label="Sealbreak workflow steps"
+          tabindex="0"
+        >
           {
             workflowSteps.map((step) => (
               <article class="workflow-step">
@@ -130,6 +132,11 @@ const trustItems = [
             ))
           }
         </div>
+
+        <p class="workflow__note">
+          For servers that use Shamir unseal shares. If your server requires
+          multiple shares, the others are still needed.
+        </p>
       </div>
     </section>
 
@@ -138,11 +145,7 @@ const trustItems = [
         <header class="section-intro section-intro--trust">
           <p class="section-eyebrow">BUILT FOR TRUST</p>
           <h2 id="trust-title">Security you can verify.</h2>
-          <p class="section-lead">
-            Sealbreak handles key material that can unlock your infrastructure.
-            Its security model is deliberately small, inspectable, and built
-            around platform-enforced controls — not a Sealbreak cloud service.
-          </p>
+
         </header>
 
         <div class="trust__card">
@@ -176,12 +179,6 @@ const trustItems = [
           </PapercutCard>
         </div>
 
-        <div class="trust-strip" aria-label="Sealbreak security properties">
-          <span>Device-bound Keychain</span>
-          <span>No share cloud sync</span>
-          <span>No share export</span>
-          <span>Open source</span>
-        </div>
       </div>
     </section>
   </main>
@@ -317,16 +314,6 @@ const trustItems = [
     text-wrap: balance;
   }
 
-  .section-lead {
-    max-width: 39rem;
-    margin: 1.4rem auto 0;
-    color: var(--secondary-text);
-    font-size: clamp(1rem, 0.94rem + 0.24vw, 1.16rem);
-    font-weight: 500;
-    line-height: 1.65;
-    text-wrap: pretty;
-  }
-
   .workflow__grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -366,6 +353,22 @@ const trustItems = [
     font-size: 0.94rem;
     line-height: 1.6;
     text-wrap: pretty;
+  }
+
+  .workflow__grid:focus-visible {
+    border-radius: 1rem;
+    outline: 3px solid var(--sun);
+    outline-offset: 0.75rem;
+  }
+
+  .workflow__note {
+    max-width: 38rem;
+    margin: 3rem auto 0;
+    color: var(--secondary-text);
+    font-size: 0.82rem;
+    line-height: 1.5;
+    text-align: center;
+    opacity: 0.85;
   }
 
   .trust {
@@ -450,30 +453,11 @@ const trustItems = [
     outline-offset: 0.3rem;
   }
 
-  .trust-strip {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.65rem;
-    margin: 2.25rem auto 0;
-  }
-
-  .trust-strip span {
-    padding: 0.55rem 0.8rem;
-    border: 1px solid rgb(150 184 214 / 0.2);
-    border-radius: 999px;
-    background: rgb(4 26 44 / 0.36);
-    color: var(--secondary-text);
-    font-size: 0.72rem;
-    font-weight: 680;
-    letter-spacing: 0.025em;
-  }
-
   @media (max-width: 840px) {
     .workflow__grid {
       display: flex;
       align-items: flex-start;
-      gap: 1.5rem;
+      gap: 2rem;
       overflow-x: auto;
       padding: 0 16% 1.25rem 0;
       scroll-padding-inline: 0;
