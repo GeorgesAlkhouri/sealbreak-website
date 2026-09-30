@@ -99,7 +99,7 @@ const trustItems = [
 
       <a class="hero__scroll-cue" href="#workflow">
         <span class="hero__scroll-cue-paper">
-          <span class="hero__scroll-cue-label">HOW IT<br />WORKS</span>
+          <span class="hero__scroll-cue-label">HOW IT WORKS</span>
           <span class="hero__scroll-cue-arrow" aria-hidden="true">↓</span>
         </span>
       </a>
@@ -293,78 +293,79 @@ const trustItems = [
     position: absolute;
     z-index: 2;
     bottom: calc(clamp(13.5rem, 24vw, 18rem) + 1.35rem);
-    left: clamp(0.65rem, 1.2vw, 1.25rem);
+    left: max(1rem, env(safe-area-inset-left));
     display: none;
     isolation: isolate;
     color: var(--forest-front);
     text-decoration: none;
-    filter: drop-shadow(0 0.5rem 0.55rem rgb(0 0 0 / 0.26));
+    filter: drop-shadow(0 0.42rem 0.48rem rgb(0 0 0 / 0.24));
   }
 
   .hero__scroll-cue::before,
   .hero__scroll-cue::after {
     position: absolute;
     z-index: -1;
-    width: clamp(8.2rem, 9vw, 9.2rem);
-    height: clamp(7.5rem, 8vw, 8.4rem);
-    clip-path: polygon(2% 3%, 96% 0, 100% 96%, 4% 100%, 0 8%);
+    width: clamp(10rem, 11vw, 11.4rem);
+    height: clamp(4.35rem, 4.8vw, 4.9rem);
+    clip-path: polygon(2% 5%, 97% 0, 100% 93%, 4% 100%, 0 10%);
     content: "";
     pointer-events: none;
   }
 
   .hero__scroll-cue::before {
-    top: 0.32rem;
-    left: 0.28rem;
+    top: 0.2rem;
+    left: 0.24rem;
     background: #d8cfbd;
-    transform: rotate(0.7deg);
+    transform: rotate(0.8deg);
   }
 
   .hero__scroll-cue::after {
-    top: 0.62rem;
-    left: 0.58rem;
+    top: 0.42rem;
+    left: 0.5rem;
     z-index: -2;
     background: #8999ad;
-    transform: rotate(2.6deg);
+    transform: rotate(2deg);
   }
 
   .hero__scroll-cue-paper {
     position: relative;
     display: grid;
-    width: clamp(8.2rem, 9vw, 9.2rem);
-    min-height: clamp(7.5rem, 8vw, 8.4rem);
-    place-items: center;
-    align-content: center;
-    gap: 0.55rem;
-    padding: 1.5rem 1.1rem 0.95rem;
+    grid-template-columns: 1fr auto;
+    width: clamp(10rem, 11vw, 11.4rem);
+    min-height: clamp(4.35rem, 4.8vw, 4.9rem);
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem 1rem 0.9rem;
     background: var(--cream);
-    clip-path: polygon(2% 3%, 96% 0, 100% 96%, 4% 100%, 0 8%);
-    text-align: center;
-    transform: rotate(-1.8deg);
+    clip-path: polygon(2% 5%, 97% 0, 100% 93%, 4% 100%, 0 10%);
+    text-align: left;
+    transform: rotate(-1.35deg);
     transition: transform 140ms ease;
   }
 
   .hero__scroll-cue-paper::before {
     position: absolute;
-    top: -0.62rem;
-    left: 50%;
-    width: 3.6rem;
-    height: 1.15rem;
+    top: -0.48rem;
+    left: 1rem;
+    width: 3rem;
+    height: 0.95rem;
     background: #7f6aa8;
     clip-path: polygon(4% 8%, 96% 0, 100% 88%, 3% 100%);
     content: "";
-    filter: drop-shadow(0 0.12rem 0.12rem rgb(0 0 0 / 0.16));
-    transform: translateX(-50%) rotate(-4deg);
+    filter: drop-shadow(0 0.1rem 0.1rem rgb(0 0 0 / 0.15));
+    transform: rotate(-5deg);
   }
 
   .hero__scroll-cue-label {
-    font-size: 0.82rem;
+    font-size: 0.72rem;
     font-weight: 850;
-    line-height: 1.08;
+    line-height: 1.05;
     letter-spacing: 0.09em;
+    white-space: nowrap;
   }
 
   .hero__scroll-cue:hover .hero__scroll-cue-paper {
-    transform: translateY(-0.14rem) rotate(-1.8deg);
+    transform: translateY(-0.12rem) rotate(-1.35deg);
   }
 
   .hero__scroll-cue:focus-visible {
@@ -374,7 +375,7 @@ const trustItems = [
 
   .hero__scroll-cue-arrow {
     color: var(--sun);
-    font-size: 1.55rem;
+    font-size: 1.3rem;
     font-weight: 800;
     line-height: 0.9;
     transition: transform 140ms ease;
