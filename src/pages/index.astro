@@ -95,11 +95,14 @@ const trustItems = [
           </div>
         </div>
 
-        <a class="hero__scroll-cue" href="#workflow">
+      </div>
+
+      <a class="hero__scroll-cue" href="#workflow">
+        <span class="hero__scroll-cue-paper">
           <span>HOW IT WORKS</span>
           <span class="hero__scroll-cue-arrow" aria-hidden="true">↓</span>
-        </a>
-      </div>
+        </span>
+      </a>
     </section>
 
     <section id="workflow" class="workflow" aria-labelledby="workflow-title">
@@ -288,36 +291,66 @@ const trustItems = [
 
   .hero__scroll-cue {
     position: absolute;
-    bottom: 2.2rem;
+    z-index: 2;
+    bottom: calc(clamp(13.5rem, 24vw, 18rem) + 1rem);
     left: 0;
     display: none;
-    align-items: center;
-    gap: 0.6rem;
-    padding: 0.78rem 1rem 0.82rem;
-    background: var(--cream);
-    clip-path: polygon(0 0, 92% 0, 100% 18%, 100% 100%, 8% 100%, 0 84%);
+    isolation: isolate;
     color: var(--forest-front);
-    filter: drop-shadow(0 0.34rem 0.4rem rgb(0 0 0 / 0.24));
-    font-size: 0.72rem;
-    font-weight: 800;
-    letter-spacing: 0.12em;
     text-decoration: none;
-    transition: transform 140ms ease, filter 140ms ease;
+    filter: drop-shadow(0 0.42rem 0.46rem rgb(0 0 0 / 0.24));
   }
 
-  .hero__scroll-cue:hover {
-    filter: drop-shadow(0 0.46rem 0.5rem rgb(0 0 0 / 0.3));
-    transform: translateY(-0.1rem);
+  .hero__scroll-cue::before {
+    position: absolute;
+    z-index: -1;
+    inset: 0.34rem -0.24rem -0.28rem 0.3rem;
+    background: var(--card-back-1);
+    clip-path: polygon(0 7%, 89% 0, 100% 22%, 97% 90%, 89% 100%, 5% 96%, 0 79%);
+    content: "";
+    transform: rotate(1.4deg);
+  }
+
+  .hero__scroll-cue-paper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.86rem 1.15rem 0.9rem 1.25rem;
+    overflow: hidden;
+    background: var(--cream);
+    clip-path: polygon(0 5%, 88% 0, 100% 22%, 98% 89%, 91% 100%, 5% 97%, 0 80%);
+    font-size: 0.72rem;
+    font-weight: 820;
+    letter-spacing: 0.12em;
+    transform: rotate(-0.7deg);
+    transition: transform 140ms ease;
+  }
+
+  .hero__scroll-cue-paper::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 1.05rem;
+    height: 1.05rem;
+    background: var(--secondary-text);
+    clip-path: polygon(0 0, 100% 100%, 0 100%);
+    content: "";
+    opacity: 0.78;
+  }
+
+  .hero__scroll-cue:hover .hero__scroll-cue-paper {
+    transform: translateY(-0.12rem) rotate(-0.7deg);
   }
 
   .hero__scroll-cue:focus-visible {
     outline: 3px solid var(--sun);
-    outline-offset: 0.4rem;
+    outline-offset: 0.42rem;
   }
 
   .hero__scroll-cue-arrow {
     color: var(--sun);
-    font-size: 1.05rem;
+    font-size: 1.08rem;
     line-height: 1;
     transition: transform 140ms ease;
   }
@@ -578,7 +611,7 @@ const trustItems = [
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hero__scroll-cue,
+    .hero__scroll-cue-paper,
     .hero__scroll-cue-arrow,
     .trust__actions a span {
       transition: none;
