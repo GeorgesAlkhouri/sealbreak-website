@@ -107,6 +107,7 @@ const { icon, title, description } = Astro.props;
       0 0.5rem 0.95rem rgb(0 0 0 / 0.24);
     cursor: pointer;
     list-style: none;
+    -webkit-tap-highlight-color: transparent;
     transition:
       transform 140ms ease,
       box-shadow 140ms ease,
@@ -122,6 +123,10 @@ const { icon, title, description } = Astro.props;
     box-shadow:
       0.16rem 0.24rem 0 var(--card-back-1),
       0 0.65rem 1.1rem rgb(0 0 0 / 0.27);
+  }
+
+  .trust-claim__summary:focus:not(:focus-visible) {
+    outline: none;
   }
 
   .trust-claim__summary:focus-visible {
