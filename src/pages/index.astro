@@ -99,7 +99,7 @@ const trustItems = [
 
       <a class="hero__scroll-cue" href="#workflow">
         <span class="hero__scroll-cue-paper">
-          <span>HOW IT WORKS</span>
+          <span class="hero__scroll-cue-label">HOW IT<br />WORKS</span>
           <span class="hero__scroll-cue-arrow" aria-hidden="true">↓</span>
         </span>
       </a>
@@ -292,71 +292,69 @@ const trustItems = [
   .hero__scroll-cue {
     position: absolute;
     z-index: 2;
-    bottom: calc(clamp(13.5rem, 24vw, 18rem) + 1rem);
-    left: 0;
+    bottom: calc(clamp(13.5rem, 24vw, 18rem) + 1.35rem);
+    left: clamp(0.65rem, 1.2vw, 1.25rem);
     display: none;
-    isolation: isolate;
     color: var(--forest-front);
     text-decoration: none;
-    filter: drop-shadow(0 0.42rem 0.46rem rgb(0 0 0 / 0.24));
-  }
-
-  .hero__scroll-cue::before {
-    position: absolute;
-    z-index: -1;
-    inset: 0.34rem -0.24rem -0.28rem 0.3rem;
-    background: var(--card-back-1);
-    clip-path: polygon(0 7%, 89% 0, 100% 22%, 97% 90%, 89% 100%, 5% 96%, 0 79%);
-    content: "";
-    transform: rotate(1.4deg);
+    filter: drop-shadow(0 0.5rem 0.55rem rgb(0 0 0 / 0.26));
   }
 
   .hero__scroll-cue-paper {
     position: relative;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.65rem;
-    padding: 0.86rem 1.15rem 0.9rem 1.25rem;
-    overflow: hidden;
+    display: grid;
+    width: clamp(8.2rem, 9vw, 9.2rem);
+    min-height: clamp(7.5rem, 8vw, 8.4rem);
+    place-items: center;
+    align-content: center;
+    gap: 0.55rem;
+    padding: 1.5rem 1.1rem 0.95rem;
     background: var(--cream);
-    clip-path: polygon(0 5%, 88% 0, 100% 22%, 98% 89%, 91% 100%, 5% 97%, 0 80%);
-    font-size: 0.72rem;
-    font-weight: 820;
-    letter-spacing: 0.12em;
-    transform: rotate(-0.7deg);
+    clip-path: polygon(2% 3%, 96% 0, 100% 96%, 4% 100%, 0 8%);
+    text-align: center;
+    transform: rotate(-1.8deg);
     transition: transform 140ms ease;
   }
 
-  .hero__scroll-cue-paper::after {
+  .hero__scroll-cue-paper::before {
     position: absolute;
-    top: 0;
-    right: 0;
-    width: 1.05rem;
-    height: 1.05rem;
-    background: var(--secondary-text);
-    clip-path: polygon(0 0, 100% 100%, 0 100%);
+    top: -0.62rem;
+    left: 50%;
+    width: 3.6rem;
+    height: 1.15rem;
+    background: rgb(72 103 129 / 0.88);
+    clip-path: polygon(4% 8%, 96% 0, 100% 88%, 3% 100%);
     content: "";
-    opacity: 0.78;
+    filter: drop-shadow(0 0.12rem 0.12rem rgb(0 0 0 / 0.15));
+    transform: translateX(-50%) rotate(-4deg);
+  }
+
+  .hero__scroll-cue-label {
+    font-size: 0.82rem;
+    font-weight: 850;
+    line-height: 1.08;
+    letter-spacing: 0.09em;
   }
 
   .hero__scroll-cue:hover .hero__scroll-cue-paper {
-    transform: translateY(-0.12rem) rotate(-0.7deg);
+    transform: translateY(-0.14rem) rotate(-1.8deg);
   }
 
   .hero__scroll-cue:focus-visible {
     outline: 3px solid var(--sun);
-    outline-offset: 0.42rem;
+    outline-offset: 0.45rem;
   }
 
   .hero__scroll-cue-arrow {
     color: var(--sun);
-    font-size: 1.08rem;
-    line-height: 1;
+    font-size: 1.55rem;
+    font-weight: 800;
+    line-height: 0.9;
     transition: transform 140ms ease;
   }
 
   .hero__scroll-cue:hover .hero__scroll-cue-arrow {
-    transform: translateY(0.14rem);
+    transform: translateY(0.16rem);
   }
 
   .workflow {
