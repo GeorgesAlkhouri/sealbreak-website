@@ -4,62 +4,203 @@ import Brand from "../components/Brand.astro";
 import PapercutCard from "../components/PapercutCard.astro";
 import PapercutScene from "../components/PapercutScene.astro";
 import PrimaryLink from "../components/PrimaryLink.astro";
+import ScreenshotPlaceholder from "../components/ScreenshotPlaceholder.astro";
 import TestFlightCard from "../components/TestFlightCard.astro";
+import TrustClaim from "../components/TrustClaim.astro";
+
+const workflowSteps = [
+  {
+    number: "01",
+    title: "Set up once",
+    description:
+      "Add your OpenBao or Vault server and import one unseal share.",
+    variant: "setup" as const,
+  },
+  {
+    number: "02",
+    title: "Approve with Face ID",
+    description:
+      "Tap Unseal, then use Face ID to allow access to your share.",
+    variant: "sealed" as const,
+  },
+  {
+    number: "03",
+    title: "Check the result",
+    description:
+      "Sealbreak sends your share to the server and checks whether it is still sealed.",
+    variant: "result" as const,
+  },
+];
+
+const trustItems = [
+  {
+    icon: "device" as const,
+    title: "Device-bound storage",
+    description:
+      "Your share is stored in the iOS Keychain on this iPhone. Sealbreak does not sync it to the cloud or offer an export option.",
+  },
+  {
+    icon: "face" as const,
+    title: "Face ID required",
+    description:
+      "Face ID is required before Sealbreak can read your stored share.",
+  },
+  {
+    icon: "direct" as const,
+    title: "Direct connection",
+    description:
+      "Sealbreak connects directly to the OpenBao or Vault endpoint you configure. There is no Sealbreak relay.",
+  },
+  {
+    icon: "open" as const,
+    title: "Open source",
+    description:
+      "The source code and threat model are public, including security assumptions and known risks.",
+  },
+];
 ---
 
 <BaseLayout includeWebsiteStructuredData>
   <main class="landing">
-    <PapercutScene />
+    <section class="hero-stage" aria-labelledby="hero-title">
+      <PapercutScene />
 
-    <div class="page-frame">
-      <header class="site-header">
-        <Brand />
-      </header>
+      <div class="page-frame">
+        <header class="site-header">
+          <Brand />
+        </header>
 
-      <section class="hero" aria-labelledby="hero-title">
-        <div class="hero__card">
+        <div class="hero">
+          <div class="hero__card">
+            <PapercutCard>
+              <div class="hero__copy">
+                <p class="hero__eyebrow">UNSEAL COMPANION FOR OPENBAO &amp; VAULT</p>
+                <h1 id="hero-title">Unlock OpenBao or Vault with Face ID.</h1>
+                <p class="hero__description">
+                  Sealbreak keeps one unseal share protected on your iPhone and
+                  sends it to your server only after Face ID.
+                </p>
+              </div>
+            </PapercutCard>
+          </div>
+
+          <div class="hero__action">
+            <div class="hero__controls">
+              <TestFlightCard />
+              <PrimaryLink href="https://github.com/GeorgesAlkhouri/sealbreak">
+                View on GitHub
+              </PrimaryLink>
+            </div>
+            <p>Open source · GPL-3.0</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="workflow" aria-labelledby="workflow-title">
+      <div class="section-shell">
+        <header class="section-intro">
+          <p class="section-eyebrow">WHAT SEALBREAK DOES</p>
+          <h2 id="workflow-title">Your unseal share, ready when you need it.</h2>
+        </header>
+
+        <div
+          class="workflow__grid"
+          role="region"
+          aria-label="Sealbreak workflow steps"
+          tabindex="0"
+        >
+          {
+            workflowSteps.map((step) => (
+              <article class="workflow-step">
+                <div class="workflow-step__number" aria-hidden="true">
+                  {step.number}
+                </div>
+
+                <ScreenshotPlaceholder
+                  step={step.number}
+                  label={step.title}
+                  variant={step.variant}
+                />
+
+                <div class="workflow-step__copy">
+                  <h3>{step.title}</h3>
+                  <p>{step.description}</p>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+
+      </div>
+    </section>
+
+    <section class="trust" aria-labelledby="trust-title">
+      <div class="section-shell">
+        <header class="section-intro section-intro--trust">
+          <p class="section-eyebrow">BUILT FOR TRUST</p>
+          <h2 id="trust-title">Security you can verify.</h2>
+        </header>
+
+        <div class="trust__card">
           <PapercutCard>
-            <div class="hero__copy">
-              <p class="hero__eyebrow">SHAMIR UNSEAL FOR IOS</p>
-              <h1 id="hero-title">Unlock OpenBao or Vault with Face ID.</h1>
-              <p class="hero__description">
-                Sealbreak keeps one Shamir unseal share protected on your
-                iPhone and releases it only after explicit Face ID
-                authorization.
-              </p>
+            <div class="trust__content">
+              <div class="trust__grid">
+                {
+                  trustItems.map((item) => (
+                    <TrustClaim
+                      icon={item.icon}
+                      title={item.title}
+                      description={item.description}
+                    />
+                  ))
+                }
+              </div>
+
+              <div class="trust__actions">
+                <a
+                  href="https://github.com/GeorgesAlkhouri/sealbreak/blob/main/THREAT_MODEL.md"
+                >
+                  Read the threat model
+                  <span aria-hidden="true">→</span>
+                </a>
+                <a href="https://github.com/GeorgesAlkhouri/sealbreak">
+                  Browse the source
+                  <span aria-hidden="true">→</span>
+                </a>
+              </div>
             </div>
           </PapercutCard>
         </div>
 
-        <div class="hero__action">
-          <div class="hero__controls">
-            <TestFlightCard />
-            <PrimaryLink href="https://github.com/GeorgesAlkhouri/sealbreak">
-              View on GitHub
-            </PrimaryLink>
-          </div>
-          <p>Open source · GPL-3.0</p>
-        </div>
-      </section>
-    </div>
+      </div>
+    </section>
   </main>
 </BaseLayout>
 
 <style>
   .landing {
+    background: var(--forest-front);
+  }
+
+  .hero-stage {
     position: relative;
     min-height: 100svh;
     overflow: hidden;
     background: var(--sky);
   }
 
+  .page-frame,
+  .section-shell {
+    width: min(calc(100% - 3rem), 74rem);
+    margin: 0 auto;
+  }
+
   .page-frame {
     position: relative;
     z-index: 1;
     display: flex;
-    width: min(calc(100% - 3rem), 74rem);
     min-height: 100svh;
-    margin: 0 auto;
     flex-direction: column;
   }
 
@@ -85,15 +226,19 @@ import TestFlightCard from "../components/TestFlightCard.astro";
     text-align: center;
   }
 
-  .hero__eyebrow {
+  .hero__eyebrow,
+  .section-eyebrow {
     margin: 0 0 1rem;
-    color: var(--secondary-text);
     font-size: 0.72rem;
-    font-weight: 700;
+    font-weight: 750;
     letter-spacing: 0.18em;
   }
 
-  h1 {
+  .hero__eyebrow {
+    color: var(--secondary-text);
+  }
+
+  .hero h1 {
     margin: 0;
     color: var(--cream);
     font-size: clamp(2.25rem, 1.7rem + 2.2vw, 3.8rem);
@@ -128,7 +273,7 @@ import TestFlightCard from "../components/TestFlightCard.astro";
     gap: 0.75rem;
   }
 
-  .hero__action p {
+  .hero__action > p {
     margin: 0;
     color: var(--secondary-text);
     font-size: 0.78rem;
@@ -136,8 +281,205 @@ import TestFlightCard from "../components/TestFlightCard.astro";
     letter-spacing: 0.04em;
   }
 
+  .workflow {
+    position: relative;
+    overflow: hidden;
+    background: var(--forest-front);
+    padding: clamp(5.5rem, 10vw, 8.5rem) 0 clamp(8rem, 12vw, 11rem);
+  }
+
+  .section-intro {
+    max-width: 46rem;
+    margin: 0 auto clamp(4.25rem, 7vw, 6rem);
+    text-align: center;
+  }
+
+  .section-eyebrow {
+    color: var(--sun);
+  }
+
+  .section-intro h2 {
+    margin: 0;
+    color: var(--cream);
+    font-size: clamp(2.35rem, 1.85rem + 2.3vw, 4.15rem);
+    font-weight: 850;
+    line-height: 1.02;
+    letter-spacing: -0.045em;
+    text-wrap: balance;
+  }
+
+  .workflow__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(2rem, 4vw, 4.5rem);
+    align-items: start;
+  }
+
+  .workflow-step {
+    min-width: 0;
+    text-align: center;
+  }
+
+  .workflow-step__number {
+    margin-bottom: 1.2rem;
+    color: var(--sun);
+    font-size: 1.85rem;
+    font-weight: 850;
+    letter-spacing: -0.03em;
+  }
+
+  .workflow-step__copy {
+    max-width: 19rem;
+    margin: 2.25rem auto 0;
+  }
+
+  .workflow-step h3 {
+    margin: 0;
+    color: var(--cream);
+    font-size: 1.18rem;
+    font-weight: 760;
+    line-height: 1.25;
+  }
+
+  .workflow-step p {
+    margin: 0.7rem 0 0;
+    color: var(--secondary-text);
+    font-size: 0.94rem;
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .workflow__grid:focus-visible {
+    border-radius: 1rem;
+    outline: 3px solid var(--sun);
+    outline-offset: 0.75rem;
+  }
+
+  .trust {
+    position: relative;
+    background: var(--sky);
+    padding: clamp(5.75rem, 10vw, 8rem) 0 clamp(6.5rem, 10vw, 9rem);
+  }
+
+  .trust::before {
+    position: absolute;
+    top: -3.5rem;
+    right: 0;
+    left: 0;
+    height: 3.55rem;
+    background: var(--sky);
+    clip-path: polygon(
+      0 70%,
+      12% 42%,
+      25% 68%,
+      40% 32%,
+      55% 62%,
+      70% 26%,
+      85% 58%,
+      100% 35%,
+      100% 100%,
+      0 100%
+    );
+    content: "";
+  }
+
+  .section-intro--trust {
+    margin-bottom: clamp(3.5rem, 6vw, 5rem);
+  }
+
+  .trust__card {
+    width: min(100%, 64rem);
+    margin: 0 auto;
+  }
+
+  .trust__content {
+    padding: clamp(2rem, 4vw, 3.4rem);
+  }
+
+  .trust__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: 1.25rem;
+  }
+
+  .trust__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 1.75rem;
+    margin-top: 1.75rem;
+    padding: 1.65rem 1.5rem 0;
+    border-top: 1px solid rgb(150 184 214 / 0.18);
+  }
+
+  .trust__actions a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    color: var(--cream);
+    font-size: 0.92rem;
+    font-weight: 720;
+    text-decoration: none;
+  }
+
+  .trust__actions a span {
+    color: var(--sun);
+    transition: transform 140ms ease;
+  }
+
+  .trust__actions a:hover span {
+    transform: translateX(0.2rem);
+  }
+
+  .trust__actions a:focus-visible {
+    border-radius: 0.35rem;
+    outline: 3px solid var(--sun);
+    outline-offset: 0.3rem;
+  }
+
+  @media (max-width: 840px) {
+    .workflow__grid {
+      display: flex;
+      align-items: flex-start;
+      gap: 2rem;
+      overflow-x: auto;
+      padding: 0 16% 1.25rem 0;
+      scroll-padding-inline: 0;
+      scroll-snap-type: x mandatory;
+      overscroll-behavior-inline: contain;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .workflow__grid::-webkit-scrollbar {
+      display: none;
+    }
+
+    .workflow-step {
+      flex: 0 0 82%;
+      max-width: 22rem;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+    }
+
+    .workflow-step__copy {
+      margin-top: 2rem;
+    }
+
+    .trust__grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .trust__actions {
+      padding-right: 0.75rem;
+      padding-left: 0.75rem;
+    }
+  }
+
   @media (max-width: 560px) {
-    .page-frame {
+    .page-frame,
+    .section-shell {
       width: min(calc(100% - 2rem), 74rem);
     }
 
@@ -155,8 +497,32 @@ import TestFlightCard from "../components/TestFlightCard.astro";
       padding: 2.1rem 1.45rem 2.25rem;
     }
 
-    .hero__eyebrow {
+    .hero__eyebrow,
+    .section-eyebrow {
       font-size: 0.66rem;
+    }
+
+    .workflow {
+      padding-top: 4.75rem;
+    }
+
+    .section-intro {
+      margin-bottom: 3.75rem;
+    }
+
+    .trust__content {
+      padding: 1.3rem 1rem 1.65rem;
+    }
+
+    .trust__actions {
+      display: grid;
+      gap: 0.9rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .trust__actions a span {
+      transition: none;
     }
   }
 </style>

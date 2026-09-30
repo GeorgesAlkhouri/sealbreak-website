@@ -1,0 +1,263 @@
+---
+interface Props {
+  icon: "device" | "face" | "direct" | "open";
+  title: string;
+  description: string;
+}
+
+const { icon, title, description } = Astro.props;
+---
+
+<details class="trust-claim">
+  <summary class="trust-claim__summary">
+    <span class="trust-claim__icon" aria-hidden="true">
+      {
+        icon === "device" && (
+          <svg viewBox="0 0 24 24">
+            <rect x="6.5" y="2.75" width="11" height="18.5" rx="2.3"></rect>
+            <path d="M10 17.2h4"></path>
+            <path d="M9.2 9.5h5.6v4.2H9.2z"></path>
+            <path d="M10.4 9.5V8.4a1.6 1.6 0 0 1 3.2 0v1.1"></path>
+          </svg>
+        )
+      }
+
+      {
+        icon === "face" && (
+          <svg viewBox="0 0 24 24">
+            <path d="M8 4H5a1 1 0 0 0-1 1v3"></path>
+            <path d="M16 4h3a1 1 0 0 1 1 1v3"></path>
+            <path d="M8 20H5a1 1 0 0 1-1-1v-3"></path>
+            <path d="M16 20h3a1 1 0 0 0 1-1v-3"></path>
+            <path d="M9 10v.1M15 10v.1"></path>
+            <path d="M9 15c1.7 1.3 4.3 1.3 6 0"></path>
+          </svg>
+        )
+      }
+
+      {
+        icon === "direct" && (
+          <svg viewBox="0 0 24 24">
+            <rect x="2.75" y="6" width="6.5" height="12" rx="1.5"></rect>
+            <rect x="15.25" y="5" width="6" height="4" rx="1"></rect>
+            <rect x="15.25" y="15" width="6" height="4" rx="1"></rect>
+            <path d="M9.5 12h4.8"></path>
+            <path d="m12.3 9.8 2.2 2.2-2.2 2.2"></path>
+          </svg>
+        )
+      }
+
+      {
+        icon === "open" && (
+          <svg viewBox="0 0 24 24">
+            <path d="M7.5 4.5H5.8A1.8 1.8 0 0 0 4 6.3v11.4a1.8 1.8 0 0 0 1.8 1.8h1.7"></path>
+            <path d="M16.5 4.5h1.7A1.8 1.8 0 0 1 20 6.3v11.4a1.8 1.8 0 0 1-1.8 1.8h-1.7"></path>
+            <path d="m10 8-3 4 3 4"></path>
+            <path d="m14 8 3 4-3 4"></path>
+          </svg>
+        )
+      }
+    </span>
+
+    <span class="trust-claim__title">{title}</span>
+
+    <span class="trust-claim__toggle" aria-hidden="true">
+      <span></span>
+      <span></span>
+    </span>
+  </summary>
+
+  <div class="trust-claim__reveal">
+    <div class="trust-claim__sheet">
+      <p>{description}</p>
+    </div>
+  </div>
+</details>
+
+<style>
+  .trust-claim {
+    position: relative;
+    min-width: 0;
+    isolation: isolate;
+  }
+
+  .trust-claim::before {
+    position: absolute;
+    z-index: -2;
+    inset: 0.22rem -0.22rem -0.28rem 0.22rem;
+    border-radius: 1.25rem;
+    background: var(--card-back-2);
+    box-shadow: 0 0.5rem 0.85rem rgb(0 0 0 / 0.24);
+    content: "";
+  }
+
+  .trust-claim__summary {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    min-height: 5.5rem;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.1rem;
+    border-radius: 1.25rem;
+    background: var(--mountain-near);
+    box-shadow:
+      0.16rem 0.24rem 0 var(--card-back-1),
+      0 0.5rem 0.95rem rgb(0 0 0 / 0.24);
+    cursor: pointer;
+    list-style: none;
+    transition:
+      transform 140ms ease,
+      box-shadow 140ms ease,
+      border-radius 140ms ease;
+  }
+
+  .trust-claim__summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .trust-claim__summary:hover {
+    transform: translateY(-0.08rem);
+    box-shadow:
+      0.16rem 0.24rem 0 var(--card-back-1),
+      0 0.65rem 1.1rem rgb(0 0 0 / 0.27);
+  }
+
+  .trust-claim__summary:focus-visible {
+    outline: 3px solid var(--sun);
+    outline-offset: 0.35rem;
+  }
+
+  .trust-claim__icon {
+    display: grid;
+    width: 3.25rem;
+    height: 3.25rem;
+    place-items: center;
+    border-radius: 1rem;
+    background: var(--forest-front);
+    color: var(--cream);
+    box-shadow:
+      0.12rem 0.18rem 0 var(--sun),
+      0 0.35rem 0.65rem rgb(0 0 0 / 0.24);
+  }
+
+  .trust-claim__icon svg {
+    width: 1.7rem;
+    height: 1.7rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.65;
+  }
+
+  .trust-claim__title {
+    color: var(--cream);
+    font-size: 1.05rem;
+    font-weight: 760;
+    line-height: 1.25;
+    text-wrap: balance;
+  }
+
+  .trust-claim__toggle {
+    position: relative;
+    display: grid;
+    width: 2rem;
+    height: 2rem;
+    place-items: center;
+    border-radius: 0.7rem;
+    background: var(--card);
+    box-shadow: 0.1rem 0.14rem 0 var(--card-back-2);
+  }
+
+  .trust-claim__toggle span {
+    position: absolute;
+    width: 0.78rem;
+    height: 0.12rem;
+    border-radius: 999px;
+    background: var(--sun);
+    transition: transform 160ms ease;
+  }
+
+  .trust-claim__toggle span:last-child {
+    transform: rotate(90deg);
+  }
+
+  .trust-claim__reveal {
+    position: relative;
+    z-index: 1;
+    margin: -0.6rem 0.35rem 0;
+  }
+
+  .trust-claim__sheet {
+    position: relative;
+    padding: 1.45rem 1.15rem 1.05rem;
+    border-radius: 0 0 1.1rem 1.1rem;
+    background: var(--card-back-1);
+    box-shadow:
+      0.16rem 0.25rem 0 var(--card-back-2),
+      0 0.5rem 0.85rem rgb(0 0 0 / 0.2);
+  }
+
+  .trust-claim__sheet::before {
+    position: absolute;
+    top: 0.45rem;
+    right: 1.15rem;
+    left: 1.15rem;
+    height: 0.08rem;
+    border-radius: 999px;
+    background: rgb(150 184 214 / 0.2);
+    content: "";
+  }
+
+  .trust-claim__sheet p {
+    margin: 0;
+    color: var(--secondary-text);
+    font-size: 0.9rem;
+    line-height: 1.58;
+    text-wrap: pretty;
+  }
+
+  .trust-claim[open] .trust-claim__summary {
+    border-bottom-right-radius: 0.9rem;
+    border-bottom-left-radius: 0.9rem;
+  }
+
+  .trust-claim[open] .trust-claim__toggle span:last-child {
+    transform: rotate(0deg);
+  }
+
+  .trust-claim[open]::before {
+    bottom: -0.45rem;
+  }
+
+  @media (max-width: 560px) {
+    .trust-claim__summary {
+      min-height: 5rem;
+      gap: 0.85rem;
+      padding: 0.9rem;
+    }
+
+    .trust-claim__icon {
+      width: 2.9rem;
+      height: 2.9rem;
+    }
+
+    .trust-claim__title {
+      font-size: 1rem;
+    }
+
+    .trust-claim__toggle {
+      width: 1.85rem;
+      height: 1.85rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .trust-claim__summary,
+    .trust-claim__toggle span {
+      transition: none;
+    }
+  }
+</style>
