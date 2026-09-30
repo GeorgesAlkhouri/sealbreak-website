@@ -309,7 +309,6 @@ const trustItems = [
     height: clamp(4.35rem, 4.8vw, 4.9rem);
     clip-path: polygon(2% 5%, 97% 0, 100% 93%, 4% 100%, 0 10%);
     content: "";
-    pointer-events: none;
   }
 
   .hero__scroll-cue::before {
@@ -370,10 +369,6 @@ const trustItems = [
 
   .hero__scroll-cue:hover .hero__scroll-cue-arrow {
     transform: translateY(0.16rem);
-  }
-
-  #workflow {
-    scroll-margin-top: 2rem;
   }
 
   :global(html) {
