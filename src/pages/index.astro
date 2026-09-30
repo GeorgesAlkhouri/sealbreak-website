@@ -471,8 +471,27 @@ const trustItems = [
 
   @media (max-width: 840px) {
     .workflow__grid {
-      grid-template-columns: 1fr;
-      gap: 5.5rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      overflow-x: auto;
+      padding: 0 16% 1.25rem 0;
+      scroll-padding-inline: 0;
+      scroll-snap-type: x mandatory;
+      overscroll-behavior-inline: contain;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .workflow__grid::-webkit-scrollbar {
+      display: none;
+    }
+
+    .workflow-step {
+      flex: 0 0 82%;
+      max-width: 22rem;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
     }
 
     .workflow-step__copy {
@@ -534,6 +553,10 @@ const trustItems = [
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .workflow__grid {
+      scroll-behavior: auto;
+    }
+
     .trust__actions a span {
       transition: none;
     }
