@@ -94,10 +94,15 @@ const trustItems = [
             <p>Open source · GPL-3.0</p>
           </div>
         </div>
+
+        <a class="hero__scroll-cue" href="#workflow">
+          <span>HOW IT WORKS</span>
+          <span class="hero__scroll-cue-arrow" aria-hidden="true">↓</span>
+        </a>
       </div>
     </section>
 
-    <section class="workflow" aria-labelledby="workflow-title">
+    <section id="workflow" class="workflow" aria-labelledby="workflow-title">
       <div class="section-shell">
         <header class="section-intro">
           <p class="section-eyebrow">WHAT SEALBREAK DOES</p>
@@ -281,6 +286,42 @@ const trustItems = [
     letter-spacing: 0.04em;
   }
 
+  .hero__scroll-cue {
+    position: absolute;
+    bottom: 1.4rem;
+    left: 50%;
+    display: none;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.68rem 1rem 0.72rem;
+    background: var(--cream);
+    clip-path: polygon(3% 0, 97% 2%, 100% 72%, 94% 100%, 5% 97%, 0 70%);
+    color: var(--forest-front);
+    filter: drop-shadow(0 0.3rem 0.35rem rgb(0 0 0 / 0.22));
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-decoration: none;
+    transform: translateX(-50%);
+    transition: transform 140ms ease, filter 140ms ease;
+  }
+
+  .hero__scroll-cue:hover {
+    filter: drop-shadow(0 0.42rem 0.45rem rgb(0 0 0 / 0.28));
+    transform: translate(-50%, -0.12rem);
+  }
+
+  .hero__scroll-cue:focus-visible {
+    outline: 3px solid var(--sun);
+    outline-offset: 0.35rem;
+  }
+
+  .hero__scroll-cue-arrow {
+    color: var(--button);
+    font-size: 1rem;
+    line-height: 1;
+  }
+
   .workflow {
     position: relative;
     overflow: hidden;
@@ -437,6 +478,18 @@ const trustItems = [
     outline-offset: 0.3rem;
   }
 
+  @media (min-width: 900px) {
+    .hero__scroll-cue {
+      display: inline-flex;
+    }
+  }
+
+  @media (min-width: 1200px) and (min-aspect-ratio: 2/1) {
+    .hero {
+      padding-top: clamp(5rem, 10vh, 8rem);
+    }
+  }
+
   @media (max-width: 840px) {
     .workflow__grid {
       display: flex;
@@ -521,6 +574,7 @@ const trustItems = [
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .hero__scroll-cue,
     .trust__actions a span {
       transition: none;
     }
