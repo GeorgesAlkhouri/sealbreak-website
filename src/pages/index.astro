@@ -6,6 +6,7 @@ import PapercutScene from "../components/PapercutScene.astro";
 import PrimaryLink from "../components/PrimaryLink.astro";
 import ScreenshotPlaceholder from "../components/ScreenshotPlaceholder.astro";
 import TestFlightCard from "../components/TestFlightCard.astro";
+import TrustClaim from "../components/TrustClaim.astro";
 
 const workflowSteps = [
   {
@@ -33,25 +34,25 @@ const workflowSteps = [
 
 const trustItems = [
   {
-    number: "01",
-    title: "Protected on your device",
+    icon: "device" as const,
+    title: "Device-bound storage",
     description:
       "Your stored share is protected by the iOS Keychain, bound to this device, and guarded by Face ID. Sealbreak does not cloud-sync the share or provide a share export.",
   },
   {
-    number: "02",
-    title: "Face ID protects the share itself",
+    icon: "face" as const,
+    title: "Face ID required",
     description:
       "Biometric authorization is enforced when Sealbreak accesses the protected Keychain item for a sensitive operation.",
   },
   {
-    number: "03",
-    title: "Direct to your server",
+    icon: "direct" as const,
+    title: "Direct connection",
     description:
       "Sealbreak connects directly to the OpenBao or Vault endpoint you configure. There is no Sealbreak relay in between.",
   },
   {
-    number: "04",
+    icon: "open" as const,
     title: "Open by design",
     description:
       "The source code and threat model are public, including security assumptions, known risks, and design decisions.",
@@ -150,15 +151,11 @@ const trustItems = [
               <div class="trust__grid">
                 {
                   trustItems.map((item) => (
-                    <article class="trust-item">
-                      <span class="trust-item__number" aria-hidden="true">
-                        {item.number}
-                      </span>
-                      <div>
-                        <h3>{item.title}</h3>
-                        <p>{item.description}</p>
-                      </div>
-                    </article>
+                    <TrustClaim
+                      icon={item.icon}
+                      title={item.title}
+                      description={item.description}
+                    />
                   ))
                 }
               </div>
@@ -355,8 +352,7 @@ const trustItems = [
     margin: 2.25rem auto 0;
   }
 
-  .workflow-step h3,
-  .trust-item h3 {
+  .workflow-step h3 {
     margin: 0;
     color: var(--cream);
     font-size: 1.18rem;
@@ -364,8 +360,7 @@ const trustItems = [
     line-height: 1.25;
   }
 
-  .workflow-step p,
-  .trust-item p {
+  .workflow-step p {
     margin: 0.7rem 0 0;
     color: var(--secondary-text);
     font-size: 0.94rem;
@@ -417,35 +412,8 @@ const trustItems = [
   .trust__grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0;
-  }
-
-  .trust-item {
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
-    gap: 1rem;
-    padding: 1.4rem 1.5rem;
-  }
-
-  .trust-item:nth-child(odd) {
-    border-right: 1px solid rgb(150 184 214 / 0.18);
-  }
-
-  .trust-item:nth-child(-n + 2) {
-    border-bottom: 1px solid rgb(150 184 214 / 0.18);
-  }
-
-  .trust-item__number {
-    display: grid;
-    width: 2.35rem;
-    height: 2.35rem;
-    place-items: center;
-    border-radius: 0.8rem;
-    background: var(--forest-front);
-    color: var(--sun);
-    font-size: 0.72rem;
-    font-weight: 850;
-    box-shadow: 0.12rem 0.18rem 0 var(--card-back-2);
+    align-items: start;
+    gap: 1.25rem;
   }
 
   .trust__actions {
@@ -513,18 +481,7 @@ const trustItems = [
 
     .trust__grid {
       grid-template-columns: 1fr;
-    }
-
-    .trust-item {
-      padding: 1.4rem 0.75rem;
-    }
-
-    .trust-item:nth-child(odd) {
-      border-right: 0;
-    }
-
-    .trust-item:nth-child(-n + 3) {
-      border-bottom: 1px solid rgb(150 184 214 / 0.18);
+      gap: 1rem;
     }
 
     .trust__actions {
@@ -568,11 +525,6 @@ const trustItems = [
 
     .trust__content {
       padding: 1.3rem 1rem 1.65rem;
-    }
-
-    .trust-item {
-      grid-template-columns: 1fr;
-      gap: 0.75rem;
     }
 
     .trust__actions {
