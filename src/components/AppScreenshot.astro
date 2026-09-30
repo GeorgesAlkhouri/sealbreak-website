@@ -1,0 +1,70 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+}
+
+const { src, alt } = Astro.props;
+---
+
+<div class="app-screenshot">
+  <div class="app-screenshot__paper" aria-hidden="true"></div>
+
+  <div class="app-screenshot__frame">
+    <Image
+      class="app-screenshot__image"
+      src={src}
+      alt={alt}
+      widths={[264, 528, 792]}
+      sizes="(max-width: 700px) 256px, 264px"
+      format="webp"
+      quality={90}
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+</div>
+
+<style>
+  .app-screenshot {
+    position: relative;
+    width: min(100%, 16.5rem);
+    margin: 0 auto;
+    isolation: isolate;
+  }
+
+  .app-screenshot__paper {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    border-radius: 2.75rem;
+    background: var(--card-back-1);
+    transform: translate(0.55rem, 0.75rem) rotate(1.2deg);
+    box-shadow: 0 0.8rem 1.4rem rgb(0 0 0 / 0.28);
+  }
+
+  .app-screenshot__frame {
+    overflow: hidden;
+    border: 0.42rem solid var(--card);
+    border-radius: 2.75rem;
+    background: var(--sky);
+    box-shadow:
+      inset 0 0 0 0.08rem rgb(245 232 204 / 0.12),
+      0 0.8rem 1.4rem rgb(0 0 0 / 0.32);
+  }
+
+  .app-screenshot__image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  @media (max-width: 700px) {
+    .app-screenshot {
+      width: min(100%, 16rem);
+    }
+  }
+</style>

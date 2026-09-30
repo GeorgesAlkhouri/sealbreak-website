@@ -4,31 +4,40 @@ import Brand from "../components/Brand.astro";
 import PapercutCard from "../components/PapercutCard.astro";
 import PapercutScene from "../components/PapercutScene.astro";
 import PrimaryLink from "../components/PrimaryLink.astro";
-import ScreenshotPlaceholder from "../components/ScreenshotPlaceholder.astro";
+import AppScreenshot from "../components/AppScreenshot.astro";
 import TestFlightCard from "../components/TestFlightCard.astro";
 import TrustClaim from "../components/TrustClaim.astro";
+import protectYourShare from "../assets/screenshots/protect-your-share.png";
+import sealed from "../assets/screenshots/sealed.png";
+import unsealed from "../assets/screenshots/unsealed.png";
 
 const workflowSteps = [
   {
     number: "01",
     title: "Set up once",
     description:
-      "Add your OpenBao or Vault server and import one unseal share.",
-    variant: "setup" as const,
+      "Add your server and protect one unseal share with Face ID.",
+    screenshot: protectYourShare,
+    screenshotAlt:
+      "Sealbreak setup with a Shamir share added and the Protect with Face ID button.",
   },
   {
     number: "02",
     title: "Approve with Face ID",
     description:
       "Tap Unseal, then use Face ID to allow access to your share.",
-    variant: "sealed" as const,
+    screenshot: sealed,
+    screenshotAlt:
+      "Sealbreak showing a sealed OpenBao server and the Unseal with Face ID button.",
   },
   {
     number: "03",
     title: "Check the result",
     description:
       "Sealbreak sends your share to the server and checks whether it is still sealed.",
-    variant: "result" as const,
+    screenshot: unsealed,
+    screenshotAlt:
+      "Sealbreak showing an unsealed OpenBao server, Server is available, and the Check status button.",
   },
 ];
 
@@ -125,10 +134,9 @@ const trustItems = [
                   {step.number}
                 </div>
 
-                <ScreenshotPlaceholder
-                  step={step.number}
-                  label={step.title}
-                  variant={step.variant}
+                <AppScreenshot
+                  src={step.screenshot}
+                  alt={step.screenshotAlt}
                 />
 
                 <div class="workflow-step__copy">
