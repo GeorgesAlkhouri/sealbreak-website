@@ -288,38 +288,34 @@ const trustItems = [
 
   .hero__scroll-cue {
     position: absolute;
-    bottom: 1.4rem;
-    left: 50%;
+    right: 0;
+    bottom: 1.6rem;
     display: none;
     align-items: center;
-    gap: 0.55rem;
-    padding: 0.68rem 1rem 0.72rem;
-    background: var(--cream);
-    clip-path: polygon(3% 0, 97% 2%, 100% 72%, 94% 100%, 5% 97%, 0 70%);
-    color: var(--forest-front);
-    filter: drop-shadow(0 0.3rem 0.35rem rgb(0 0 0 / 0.22));
+    gap: 0.5rem;
+    color: var(--cream);
     font-size: 0.68rem;
     font-weight: 800;
     letter-spacing: 0.14em;
     text-decoration: none;
-    transform: translateX(-50%);
-    transition: transform 140ms ease, filter 140ms ease;
-  }
-
-  .hero__scroll-cue:hover {
-    filter: drop-shadow(0 0.42rem 0.45rem rgb(0 0 0 / 0.28));
-    transform: translate(-50%, -0.12rem);
+    text-shadow: 0 0.15rem 0.3rem rgb(0 0 0 / 0.28);
   }
 
   .hero__scroll-cue:focus-visible {
+    border-radius: 0.25rem;
     outline: 3px solid var(--sun);
-    outline-offset: 0.35rem;
+    outline-offset: 0.4rem;
   }
 
   .hero__scroll-cue-arrow {
-    color: var(--button);
+    color: var(--sun);
     font-size: 1rem;
     line-height: 1;
+    transition: transform 140ms ease;
+  }
+
+  .hero__scroll-cue:hover .hero__scroll-cue-arrow {
+    transform: translateY(0.16rem);
   }
 
   .workflow {
@@ -574,7 +570,7 @@ const trustItems = [
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hero__scroll-cue,
+    .hero__scroll-cue-arrow,
     .trust__actions a span {
       transition: none;
     }
