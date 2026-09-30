@@ -11,23 +11,23 @@ import TrustClaim from "../components/TrustClaim.astro";
 const workflowSteps = [
   {
     number: "01",
-    title: "Set up once",
+    title: "Add your server",
     description:
-      "Add your OpenBao or Vault server and import one unseal share.",
+      "Add OpenBao, Vault, or another compatible Shamir-seal server and save one unseal share.",
     variant: "setup" as const,
   },
   {
     number: "02",
-    title: "Approve with Face ID",
+    title: "Unlock with Face ID",
     description:
-      "Tap Unseal, then use Face ID to allow access to your share.",
+      "When the server is sealed, tap Unseal and approve access to the stored share.",
     variant: "sealed" as const,
   },
   {
     number: "03",
-    title: "Check the result",
+    title: "Send the share",
     description:
-      "Sealbreak sends your share to the server and checks whether it is still sealed.",
+      "Sealbreak sends the share directly to your server and shows the new seal status.",
     variant: "result" as const,
   },
 ];
@@ -35,21 +35,21 @@ const workflowSteps = [
 const trustItems = [
   {
     icon: "device" as const,
-    title: "Device-bound storage",
+    title: "Stored on this iPhone",
     description:
-      "Your share is stored in the iOS Keychain on this iPhone. Sealbreak does not sync it to the cloud or offer an export option.",
+      "The share stays in the iOS Keychain on this iPhone. No cloud sync and no export.",
   },
   {
     icon: "face" as const,
-    title: "Face ID required",
+    title: "Protected by Face ID",
     description:
-      "Face ID is required before Sealbreak can read your stored share.",
+      "Sealbreak requires Face ID before it can read the stored share.",
   },
   {
     icon: "direct" as const,
-    title: "Direct connection",
+    title: "Sent directly to your server",
     description:
-      "Sealbreak connects directly to the OpenBao or Vault endpoint you configure. There is no Sealbreak relay.",
+      "Sealbreak sends the share to the endpoint you configured. There is no Sealbreak relay.",
   },
   {
     icon: "open" as const,
@@ -74,11 +74,12 @@ const trustItems = [
           <div class="hero__card">
             <PapercutCard>
               <div class="hero__copy">
-                <p class="hero__eyebrow">UNSEAL COMPANION FOR OPENBAO &amp; VAULT</p>
-                <h1 id="hero-title">Unlock OpenBao or Vault with Face ID.</h1>
+                <p class="hero__eyebrow">SHAMIR UNSEAL FOR IPHONE</p>
+                <h1 id="hero-title">Unseal OpenBao or Vault with Face ID.</h1>
                 <p class="hero__description">
-                  Sealbreak keeps one unseal share protected on your iPhone and
-                  sends it to your server only after Face ID.
+                  Keep one Shamir unseal share on your iPhone. Unlock it with
+                  Face ID and send it directly to OpenBao, Vault, or another
+                  compatible Shamir-seal server.
                 </p>
               </div>
             </PapercutCard>
@@ -108,8 +109,8 @@ const trustItems = [
     <section id="workflow" class="workflow" aria-labelledby="workflow-title">
       <div class="section-shell">
         <header class="section-intro">
-          <p class="section-eyebrow">WHAT SEALBREAK DOES</p>
-          <h2 id="workflow-title">Your unseal share, ready when you need it.</h2>
+          <p class="section-eyebrow">HOW SEALBREAK WORKS</p>
+          <h2 id="workflow-title">From setup to unseal in three steps.</h2>
         </header>
 
         <div
@@ -146,8 +147,8 @@ const trustItems = [
     <section class="trust" aria-labelledby="trust-title">
       <div class="section-shell">
         <header class="section-intro section-intro--trust">
-          <p class="section-eyebrow">BUILT FOR TRUST</p>
-          <h2 id="trust-title">Security you can verify.</h2>
+          <p class="section-eyebrow">YOUR SHARE</p>
+          <h2 id="trust-title">Stored on your iPhone. Sent only to your server.</h2>
         </header>
 
         <div class="trust__card">
