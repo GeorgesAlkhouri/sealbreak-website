@@ -14,21 +14,24 @@ const workflowSteps = [
     title: "Set up once",
     description:
       "Add your OpenBao or Vault server and import one unseal share.",
-    variant: "setup" as const,
+    src: "/screenshots/workflow-setup.webp",
+    alt: "Sealbreak setup screen showing a saved Shamir share ready to be protected with Face ID.",
   },
   {
     number: "02",
     title: "Approve with Face ID",
     description:
       "Tap Unseal, then use Face ID to allow access to your share.",
-    variant: "sealed" as const,
+    src: "/screenshots/workflow-sealed.webp",
+    alt: "Sealbreak home screen showing a sealed server and the Unseal with Face ID button.",
   },
   {
     number: "03",
     title: "Check the result",
     description:
       "Sealbreak sends your share to the server and checks whether it is still sealed.",
-    variant: "result" as const,
+    src: "/screenshots/workflow-unsealed.webp",
+    alt: "Sealbreak home screen showing the server as unsealed.",
   },
 ];
 
@@ -126,9 +129,8 @@ const trustItems = [
                 </div>
 
                 <ScreenshotPlaceholder
-                  step={step.number}
-                  label={step.title}
-                  variant={step.variant}
+                  src={step.src}
+                  alt={step.alt}
                 />
 
                 <div class="workflow-step__copy">
