@@ -26,10 +26,5 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Inspect npm advisory details (temporary)
-        run: |
-          npm audit --json > /tmp/sealbreak-npm-audit.json || true
-          jq -c '{summary:.metadata.vulnerabilities,issues:[.vulnerabilities | to_entries[] | {name:.key,severity:.value.severity,isDirect:.value.isDirect,range:.value.range,via:(.value.via | map(if type == "string" then . else {title:.title,url:.url,range:.range} end)),fixAvailable:.value.fixAvailable}]}' /tmp/sealbreak-npm-audit.json
-
       - name: Build
         run: npm run build
