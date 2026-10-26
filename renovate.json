@@ -1,0 +1,47 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:best-practices",
+    ":semanticCommits"
+  ],
+  "minimumReleaseAge": "7 days",
+  "internalChecksFilter": "strict",
+  "automerge": false,
+  "platformAutomerge": false,
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "addLabels": [
+      "security"
+    ],
+    "automerge": false
+  },
+  "packageRules": [
+    {
+      "description": "Wait 7 days for regular npm dependency updates, overriding best-practices 3-day npm preset",
+      "matchDatasources": [
+        "npm"
+      ],
+      "matchUpdateTypes": [
+        "major",
+        "minor",
+        "patch"
+      ],
+      "minimumReleaseAge": "7 days",
+      "internalChecksFilter": "strict"
+    },
+    {
+      "description": "Group non-major GitHub Actions updates",
+      "matchManagers": [
+        "github-actions"
+      ],
+      "matchDepTypes": [
+        "action"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "groupName": "GitHub Actions"
+    }
+  ]
+}
