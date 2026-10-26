@@ -26,5 +26,11 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Emit generated lockfile for bootstrapping
+        run: |
+          echo "__LOCKFILE_START__"
+          base64 -w 120 package-lock.json
+          echo "__LOCKFILE_END__"
+
       - name: Build
         run: npm run build
