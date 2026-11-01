@@ -3,5 +3,6 @@
   "extends": [
     "github>georgesalkhouri/renovate-config"
   ],
-  "platformAutomerge": false
+  "platformAutomerge": false,
+  "dependencyDashboardApproval": false
 }
