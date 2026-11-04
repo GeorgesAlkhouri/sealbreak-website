@@ -23,6 +23,18 @@ jobs:
           node-version-file: .node-version
           package-manager-cache: false
 
+      # Cloudflare Workers Builds uses the exact npm version from
+      # package.json#packageManager. Use the same version here.
+      - name: Set up npm
+        run: |
+          NPM_SPEC="$(node -p "require('./package.json').packageManager")"
+          case "$NPM_SPEC" in
+            npm@[0-9]*) ;;
+            *) echo "packageManager must be an exact npm version, got: $NPM_SPEC" >&2; exit 1 ;;
+          esac
+          npm install -g "$NPM_SPEC"
+          npm --version
+
       - name: Install dependencies
         run: npm ci
 
