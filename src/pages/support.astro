@@ -1,0 +1,76 @@
+---
+import DocumentLayout from "../layouts/DocumentLayout.astro";
+import {
+  contactEmail,
+  issuesURL,
+  threatModelURL,
+} from "../data/site";
+---
+
+<DocumentLayout
+  title="Support — Sealbreak"
+  description="Get help with Sealbreak, the iPhone app for unsealing OpenBao and HashiCorp Vault with Face ID. Contact, requirements, and frequently asked questions."
+  eyebrow="SUPPORT"
+  heading="Help with Sealbreak."
+>
+  <p slot="lead">
+    Questions, bug reports, and feedback are welcome. Never include an unseal
+    share, root token, or other secret in a message or issue.
+  </p>
+
+  <h2>Contact</h2>
+  <ul>
+    <li>
+      <strong>Email:</strong>{" "}
+      <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
+    </li>
+    <li>
+      <strong>Bugs and feature requests:</strong>{" "}
+      <a href={issuesURL}>GitHub Issues</a>
+    </li>
+  </ul>
+
+  <h2>Requirements</h2>
+  <ul>
+    <li>
+      An OpenBao server, or a compatible HashiCorp Vault server, that uses a
+      Shamir seal.
+    </li>
+    <li>
+      An HTTPS endpoint for that server with a certificate your iPhone trusts.
+    </li>
+    <li>An iPhone with Face ID and a device passcode set.</li>
+    <li>iOS 26 or later.</li>
+  </ul>
+
+  <h2>Frequently asked questions</h2>
+
+  <h3>Where is my unseal share stored?</h3>
+  <p>
+    In the iOS Keychain on your iPhone. It is bound to that device, is not
+    synced to iCloud, and is released only after Face ID. It never leaves the
+    device except when Sealbreak sends it to the server you configured.
+  </p>
+
+  <h3>Can I export my share or move it to a new iPhone?</h3>
+  <p>
+    No. There is no export by design. On a new iPhone, import the share again
+    from your own recovery copy.
+  </p>
+
+  <h3>What happens if I lose my iPhone?</h3>
+  <p>
+    The share on that iPhone may become unusable. The same can happen after
+    Face ID changes, a device reset, or deleting the app. Sealbreak is not a
+    backup. Always keep an independent recovery copy of every unseal share and
+    a separate way to unseal your server.
+  </p>
+
+  <h3>Does Sealbreak send my share anywhere else?</h3>
+  <p>
+    No. Sealbreak connects directly to your server over HTTPS. There is no
+    Sealbreak relay, and the app collects no data. See the{" "}
+    <a href="/privacy">privacy policy</a> and the{" "}
+    <a href={threatModelURL}>threat model</a> for details.
+  </p>
+</DocumentLayout>
