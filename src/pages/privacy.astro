@@ -1,0 +1,166 @@
+---
+import DocumentLayout from "../layouts/DocumentLayout.astro";
+import {
+  contactEmail,
+  repositoryURL,
+  threatModelURL,
+} from "../data/site";
+
+const effectiveDate = "7 November 2026";
+---
+
+<DocumentLayout
+  title="Privacy Policy — Sealbreak"
+  description="How the Sealbreak iPhone app and the sealbreak.app website handle your data. The app collects no data and connects only to the server you configure."
+  eyebrow="PRIVACY POLICY"
+  heading="Sealbreak collects no data."
+>
+  <p slot="lead">
+    Effective {effectiveDate}. This policy covers the Sealbreak iOS app and the
+    website at sealbreak.app.
+  </p>
+
+  <h2>Summary</h2>
+  <ul>
+    <li>The Sealbreak app does not collect, sell, or share any personal data.</li>
+    <li>
+      The app connects only to the OpenBao or HashiCorp Vault endpoint you
+      configure. There is no Sealbreak server or relay.
+    </li>
+    <li>
+      Your unseal share stays in the iOS Keychain on your iPhone. It is
+      released only after Face ID, and only to send it to your server.
+    </li>
+    <li>
+      The app contains no analytics, advertising, tracking, or crash-reporting
+      SDKs.
+    </li>
+    <li>The website sets no cookies and runs no analytics or tracking.</li>
+  </ul>
+
+  <h2>Who is responsible</h2>
+  <p>
+    Sealbreak is developed by Georges Alkhouri as an independent open-source
+    project. For any privacy question, write to
+    <a href={`mailto:${contactEmail}`}>{contactEmail}</a>.
+  </p>
+
+  <h2>The Sealbreak app</h2>
+
+  <h3>Data stored on your iPhone</h3>
+  <p>Sealbreak stores the following only on your device:</p>
+  <ul>
+    <li>
+      <strong>Your Shamir unseal share.</strong> It is kept in the iOS
+      Keychain, bound to this device, protected by Face ID, and excluded from
+      iCloud Keychain sync. Sealbreak offers no way to export it.
+    </li>
+    <li>
+      <strong>Server settings</strong>, such as the server name and HTTPS
+      address you enter. They are stored in the app's protected storage and
+      excluded from device backups.
+    </li>
+  </ul>
+  <p>
+    None of this is sent to the developer. Deleting the app or resetting it in
+    the app removes it from your iPhone.
+  </p>
+
+  <h3>Face ID</h3>
+  <p>
+    Face ID is handled entirely by iOS. Sealbreak only receives a yes or no
+    from the system and never has access to your face data.
+  </p>
+
+  <h3>Clipboard</h3>
+  <p>
+    Sealbreak reads the clipboard only when you tap paste to import a share.
+    After a valid share is pasted, Sealbreak clears the clipboard.
+  </p>
+
+  <h3>Network connections</h3>
+  <p>
+    Sealbreak connects only to the server address you configure, and only over
+    HTTPS with normal certificate validation. It sends status requests and,
+    after you approve with Face ID, your unseal share. This traffic goes
+    directly from your iPhone to your server, or to a TLS proxy you run in
+    front of it. The developer has no access to it.
+  </p>
+  <p>
+    Sealbreak does not use cookies, caches, or stored credentials for these
+    connections. What your server logs is controlled by you, not by
+    Sealbreak.
+  </p>
+
+  <h3>Analytics, tracking, and crash reports</h3>
+  <p>
+    The app contains no analytics, advertising, tracking, or crash-reporting
+    SDKs, and it does not track you across apps or websites. Its App Store
+    privacy manifest declares no tracking and no collected data types.
+  </p>
+  <p>
+    If you have turned on <em>Share With App Developers</em> in iOS settings,
+    Apple may give the developer anonymous crash reports and usage statistics.
+    This sharing is optional and governed by
+    <a href="https://www.apple.com/legal/privacy/">Apple's privacy policy</a>.
+    If you join the TestFlight beta, Apple's TestFlight terms apply to the
+    feedback and crash reports you choose to send.
+  </p>
+
+  <h2>The sealbreak.app website</h2>
+  <p>
+    The website is a static site hosted by Cloudflare. It sets no cookies, uses
+    no analytics or tracking, and loads no third-party scripts, fonts, or
+    embeds.
+  </p>
+  <p>
+    To deliver and protect the site, Cloudflare processes technical request
+    data such as your IP address, browser user agent, and the page requested.
+    Cloudflare may keep this data in short-lived logs. This processing is
+    covered by
+    <a href="https://www.cloudflare.com/privacypolicy/">Cloudflare's privacy policy</a>.
+    The developer does not use it to identify or profile visitors.
+  </p>
+  <p>
+    Links to GitHub, TestFlight, and the App Store lead to services with their
+    own privacy policies.
+  </p>
+
+  <h2>When you contact us</h2>
+  <p>
+    If you email us or open a GitHub issue, we use what you send only to answer
+    you and improve Sealbreak. Emails are not shared with third parties. GitHub
+    issues are public and governed by
+    <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement">GitHub's privacy statement</a>.
+    Please never include an unseal share, root token, or other secret in a
+    message or issue.
+  </p>
+
+  <h2>Your rights</h2>
+  <p>
+    Because the app collects no data, the developer holds no app data about
+    you. For any email you have sent, you can ask for access, correction, or
+    deletion at
+    <a href={`mailto:${contactEmail}`}>{contactEmail}</a>. You may also lodge a
+    complaint with your data protection authority.
+  </p>
+
+  <h2>Children</h2>
+  <p>
+    Sealbreak is a tool for infrastructure operators and is not directed at
+    children.
+  </p>
+
+  <h2>Changes</h2>
+  <p>
+    If this policy changes, the updated version will be published on this page
+    with a new effective date. The source of the app and this website is
+    public, so you can check every change.
+  </p>
+
+  <p class="muted">
+    More detail on how Sealbreak protects your share is in the
+    <a href={threatModelURL}>threat model</a> and the
+    <a href={repositoryURL}>source code</a>.
+  </p>
+</DocumentLayout>

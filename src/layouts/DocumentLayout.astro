@@ -1,0 +1,168 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import Brand from "../components/Brand.astro";
+import PapercutCard from "../components/PapercutCard.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  eyebrow: string;
+  heading: string;
+}
+
+const { title, description, eyebrow, heading } = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="document-page">
+    <header class="document-page__header">
+      <Brand />
+    </header>
+
+    <main class="document-page__main">
+      <header class="document-page__intro">
+        <p class="document-page__eyebrow">{eyebrow}</p>
+        <h1>{heading}</h1>
+        <slot name="lead" />
+      </header>
+
+      <PapercutCard>
+        <article class="prose">
+          <slot />
+        </article>
+      </PapercutCard>
+    </main>
+
+    <SiteFooter />
+  </div>
+</BaseLayout>
+
+<style>
+  .document-page {
+    min-height: 100vh;
+    background: var(--sky);
+  }
+
+  .document-page__header,
+  .document-page__main {
+    width: min(calc(100% - 3rem), 50rem);
+    margin: 0 auto;
+  }
+
+  .document-page__header {
+    padding-top: clamp(1.75rem, 4vh, 3.2rem);
+  }
+
+  .document-page__main {
+    padding: clamp(3rem, 7vw, 5rem) 0 clamp(4rem, 8vw, 6rem);
+  }
+
+  .document-page__intro {
+    margin-bottom: clamp(2.25rem, 5vw, 3.25rem);
+  }
+
+  .document-page__eyebrow {
+    margin: 0 0 1rem;
+    color: var(--sun);
+    font-size: 0.72rem;
+    font-weight: 750;
+    letter-spacing: 0.18em;
+  }
+
+  .document-page__intro h1 {
+    margin: 0;
+    color: var(--cream);
+    font-size: clamp(2.25rem, 1.8rem + 2vw, 3.6rem);
+    font-weight: 850;
+    line-height: 1.04;
+    letter-spacing: -0.045em;
+    text-wrap: balance;
+  }
+
+  .document-page__intro :global(p:not(.document-page__eyebrow)) {
+    max-width: 38rem;
+    margin: 1.1rem 0 0;
+    color: var(--secondary-text);
+    font-size: 1.02rem;
+    line-height: 1.6;
+  }
+
+  .prose {
+    padding: clamp(1.6rem, 4vw, 3rem);
+    color: var(--cream);
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  .prose :global(h2) {
+    margin: 2.4rem 0 0.75rem;
+    font-size: 1.3rem;
+    font-weight: 780;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+  }
+
+  .prose :global(h2:first-child) {
+    margin-top: 0;
+  }
+
+  .prose :global(h3) {
+    margin: 1.6rem 0 0.4rem;
+    font-size: 1.05rem;
+    font-weight: 740;
+  }
+
+  .prose :global(p),
+  .prose :global(ul) {
+    margin: 0.65rem 0 0;
+  }
+
+  .prose :global(ul) {
+    padding-left: 1.25rem;
+  }
+
+  .prose :global(li + li) {
+    margin-top: 0.4rem;
+  }
+
+  .prose :global(li::marker) {
+    color: var(--sun);
+  }
+
+  .prose :global(a) {
+    color: var(--cream);
+    font-weight: 650;
+    text-decoration-color: var(--sun);
+    text-underline-offset: 0.2em;
+  }
+
+  .prose :global(a:focus-visible) {
+    border-radius: 0.25rem;
+    outline: 3px solid var(--sun);
+    outline-offset: 0.2rem;
+  }
+
+  .prose :global(code) {
+    padding: 0.08em 0.35em;
+    border-radius: 0.35rem;
+    background: var(--card-back-2);
+    font-size: 0.9em;
+  }
+
+  .prose :global(.muted) {
+    color: var(--secondary-text);
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 560px) {
+    .document-page__header,
+    .document-page__main {
+      width: min(calc(100% - 2rem), 50rem);
+    }
+
+    .prose {
+      padding: 1.4rem 1.15rem 1.7rem;
+    }
+  }
+</style>
