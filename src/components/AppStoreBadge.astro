@@ -5,18 +5,15 @@ import { appStoreURL } from "../data/site";
 // https://developer.apple.com/app-store/marketing/guidelines/
 // Apple's rules: use the badge as provided, never modify, angle or animate
 // it, keep it at least 40 px tall, and keep clear space of a quarter of its
-// height around it. The paper sheets below are only a backdrop. The front
-// sheet stays level, its padding is the clear space, and hover effects move
-// only the back sheets, never the badge.
+// height around it. The paper below is only a backdrop. The front sheet
+// stays level, its padding is the clear space, and on hover only the back
+// sheet moves, never the badge.
 const badgeWidth = 119.66407;
 const badgeHeight = 40;
 ---
 
 <a class="app-store-badge" href={appStoreURL}>
-  <span class="app-store-badge__sheet app-store-badge__sheet--far" aria-hidden="true"
-  ></span>
-  <span class="app-store-badge__sheet app-store-badge__sheet--near" aria-hidden="true"
-  ></span>
+  <span class="app-store-badge__back" aria-hidden="true"></span>
   <span class="app-store-badge__front">
     <img
       src="/download-on-the-app-store.svg"
@@ -30,33 +27,24 @@ const badgeHeight = 40;
 <style>
   .app-store-badge {
     --badge-height: 3.25rem;
-    --paper-cut: polygon(2% 6%, 97% 0, 100% 92%, 4% 100%, 0 12%);
+    --paper-cut: polygon(0.6% 2%, 99.4% 0, 100% 97.5%, 0 100%);
 
     position: relative;
     display: inline-block;
     isolation: isolate;
     line-height: 0;
     filter: drop-shadow(0 0.42rem 0.48rem rgb(0 0 0 / 0.24));
-    transition: filter 140ms ease;
   }
 
-  .app-store-badge__sheet {
+  .app-store-badge__back {
     position: absolute;
-    inset: 0;
-    clip-path: var(--paper-cut);
-    transition: transform 140ms ease;
-  }
-
-  .app-store-badge__sheet--far {
-    z-index: -2;
-    background: #8999ad;
-    transform: translate(0.5rem, 0.42rem) rotate(2deg);
-  }
-
-  .app-store-badge__sheet--near {
     z-index: -1;
-    background: #d8cfbd;
-    transform: translate(0.24rem, 0.2rem) rotate(0.8deg);
+    inset: 0;
+    background: #c9bda3;
+    clip-path: var(--paper-cut);
+    transform: translate(0.14rem, 0.32rem);
+    pointer-events: none;
+    transition: transform 140ms ease;
   }
 
   .app-store-badge__front {
@@ -71,16 +59,8 @@ const badgeHeight = 40;
     height: var(--badge-height);
   }
 
-  .app-store-badge:hover {
-    filter: drop-shadow(0 0.6rem 0.6rem rgb(0 0 0 / 0.3));
-  }
-
-  .app-store-badge:hover .app-store-badge__sheet--far {
-    transform: translate(0.7rem, 0.6rem) rotate(2.8deg);
-  }
-
-  .app-store-badge:hover .app-store-badge__sheet--near {
-    transform: translate(0.36rem, 0.3rem) rotate(1.2deg);
+  .app-store-badge:hover .app-store-badge__back {
+    transform: translate(0.2rem, 0.46rem);
   }
 
   .app-store-badge:focus-visible {
@@ -89,8 +69,7 @@ const badgeHeight = 40;
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .app-store-badge,
-    .app-store-badge__sheet {
+    .app-store-badge__back {
       transition: none;
     }
   }
