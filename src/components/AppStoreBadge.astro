@@ -1,0 +1,51 @@
+---
+import { appStoreURL } from "../data/site";
+
+// Apple's official badge artwork, unmodified, from
+// https://developer.apple.com/app-store/marketing/guidelines/
+// Apple's rules: the black badge is preferred, it must be at least 40 px
+// tall on screen, and it needs clear space of a quarter of its height.
+const badgeWidth = 119.66407;
+const badgeHeight = 40;
+---
+
+<a class="app-store-badge" href={appStoreURL}>
+  <img
+    src="/download-on-the-app-store.svg"
+    alt="Download Sealbreak on the App Store"
+    width={badgeWidth}
+    height={badgeHeight}
+  />
+</a>
+
+<style>
+  .app-store-badge {
+    --badge-height: 3.75rem;
+
+    display: inline-block;
+    padding: calc(var(--badge-height) / 4);
+    border-radius: 0.9rem;
+    line-height: 0;
+    transition: transform 140ms ease;
+  }
+
+  .app-store-badge img {
+    width: auto;
+    height: var(--badge-height);
+  }
+
+  .app-store-badge:hover {
+    transform: translateY(-0.1rem);
+  }
+
+  .app-store-badge:focus-visible {
+    outline: 3px solid var(--sun);
+    outline-offset: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .app-store-badge {
+      transition: none;
+    }
+  }
+</style>
