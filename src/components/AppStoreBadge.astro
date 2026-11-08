@@ -1,0 +1,76 @@
+---
+import { appStoreURL } from "../data/site";
+
+// Apple's official badge artwork, unmodified, from
+// https://developer.apple.com/app-store/marketing/guidelines/
+// Apple's rules: use the badge as provided, never modify, angle or animate
+// it, keep it at least 40 px tall, and keep clear space of a quarter of its
+// height around it. The paper below is only a backdrop. The front sheet
+// stays level, its padding is the clear space, and on hover only the back
+// sheet moves, never the badge.
+const badgeWidth = 119.66407;
+const badgeHeight = 40;
+---
+
+<a class="app-store-badge" href={appStoreURL}>
+  <span class="app-store-badge__back" aria-hidden="true"></span>
+  <span class="app-store-badge__front">
+    <img
+      src="/download-on-the-app-store.svg"
+      alt="Download Sealbreak on the App Store"
+      width={badgeWidth}
+      height={badgeHeight}
+    />
+  </span>
+</a>
+
+<style>
+  .app-store-badge {
+    --badge-height: 3.25rem;
+    --paper-cut: polygon(0.6% 2%, 99.4% 0, 100% 97.5%, 0 100%);
+
+    position: relative;
+    display: inline-block;
+    isolation: isolate;
+    line-height: 0;
+    filter: drop-shadow(0 0.42rem 0.48rem rgb(0 0 0 / 0.24));
+  }
+
+  .app-store-badge__back {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background: #c9bda3;
+    clip-path: var(--paper-cut);
+    transform: translate(0.14rem, 0.32rem);
+    pointer-events: none;
+    transition: transform 140ms ease;
+  }
+
+  .app-store-badge__front {
+    display: block;
+    padding: calc(var(--badge-height) / 4) calc(var(--badge-height) / 4 + 0.4rem);
+    background: var(--cream);
+    clip-path: var(--paper-cut);
+  }
+
+  .app-store-badge img {
+    width: auto;
+    height: var(--badge-height);
+  }
+
+  .app-store-badge:hover .app-store-badge__back {
+    transform: translate(0.2rem, 0.46rem);
+  }
+
+  .app-store-badge:focus-visible {
+    outline: 3px solid var(--sun);
+    outline-offset: 0.6rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .app-store-badge__back {
+      transition: none;
+    }
+  }
+</style>
