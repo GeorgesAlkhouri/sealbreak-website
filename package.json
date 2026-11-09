@@ -14,7 +14,7 @@
     "astro": "7.4.4"
   },
   "devDependencies": {
-    "wrangler": "4.156.1"
+    "wrangler": "4.156.2"
   },
   "devEngines": {
     "runtime": {
