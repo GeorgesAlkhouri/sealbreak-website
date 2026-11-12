@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "packageManager": "npm@12.2.1",
+  "packageManager": "npm@12.2.2",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
